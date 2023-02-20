@@ -5,7 +5,7 @@ body {
 }
 
 .bg-blue {
-  background-color: rgb(52, 52, 170);
+  background-color: rgb(148, 36, 131);
 }
 
 .nav-link {
@@ -17,7 +17,7 @@ body {
 }
 
 .nav-link:hover {
-  color: rgb(53, 208, 255);
+  color: rgba(248, 53, 255, 0.438);
 }
 
 .navbar-nav {
