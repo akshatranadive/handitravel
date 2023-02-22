@@ -2,6 +2,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .bg-blue {
@@ -20,6 +22,6 @@ body {
   color: rgb(255, 53, 53);
 }
 
-.navbar-nav {
+/* .navbar-nav {
   margin-right: 0;
-}
+} */

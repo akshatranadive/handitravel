@@ -1,40 +1,36 @@
 import React from 'react';
-import { Navbar, Nav, NavDropdown, Container, Button } from 'react-bootstrap';
-import './HomePage.css';
 
-const HomePage = () => {
-  return (
-      
-    <div className="">
-      <Navbar sticky="top" expand="lg" variant="dark" bg="blue">
-        <Container>
-          <Navbar.Brand>Handi Travel</Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbar-nav" />
-          <Navbar.Collapse id="navbar-nav" className="justify-content-end">
-            <Nav>
-              <Nav.Link>Home</Nav.Link>
-              <Nav.Link>Guides</Nav.Link>
-              <Nav.Link>Community</Nav.Link>
-              <Nav.Link>About Us</Nav.Link>
-              <Button variant="info">Log In</Button>{' '}
-              <Button variant="info">Sign Up</Button>{' '}
-              <Nav.Link></Nav.Link>
-              <NavDropdown title="Settings">
-                <NavDropdown.Item>Profile</NavDropdown.Item>
-                <NavDropdown.Item>Account</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item>Logout</NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-
-      <h1>Handi Travel</h1>
-      <p>Welcome to Handi Travel, the premier travel community for people with disabilities.</p>
-    </div>
-  );
+const Homepage = () => {
+return (
+<div className='mx-3'>
+<h1>Welcome to our website!</h1>
+<p>We are dedicated to providing the best travel options for people with disabilities.</p>
+<h2>Our Features</h2>
+  <ul>
+    <li>Easy-to-use interface</li>
+    <li>Search and compare prices for hotels, flights, and buses</li>
+    <li>Customizable options for accessibility needs</li>
+  </ul>
+  
+  <h2>Booking for Disabled</h2>
+  <p>We understand the unique challenges that people with disabilities face when traveling, and we strive to make the process as smooth and stress-free as possible. Our website offers a variety of features specifically tailored to the needs of people with disabilities, including:</p>
+  <ul>
+    <li>Wheelchair accessibility options for hotels, flights, and buses</li>
+    <li>Assistance for hearing or visually impaired travelers</li>
+    <li>Special needs assistance, such as service animals and mobility equipment rental</li>
+  </ul>
+  
+  <h2>Price Comparison</h2>
+  <p>We are committed to providing our users with the best prices for their travel needs. Our website allows you to easily compare prices from different providers, so you can be sure you're getting the best deal. </p>
+  
+  <h2>About Us</h2>
+  <p>Our website was created with the idea of making travel more accessible for people with disabilities. We believe that everyone should have the opportunity to see the world, and we strive to make that possible for all of our users.</p>
+</div>
+);
 };
 
+export default Homepage;
 
-export default HomePage;
+
+
+
