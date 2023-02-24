@@ -17,7 +17,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-      <Navbar bg="primary" variant="dark" expand="lg" className="navbar">
+      <Navbar sticky="top" bg="primary" variant="dark" expand="lg" className="navbar">
           <Navbar.Brand as={Link} to="/" className='mx-3'>
           <span className="ml-5 handi-travel">Handi Travel</span>
           </Navbar.Brand>

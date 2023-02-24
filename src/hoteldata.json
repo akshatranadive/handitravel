@@ -1,0 +1,27 @@
+[  {    "name": "Hilton Hotel",    "description": "A luxurious hotel in the heart of the city",    
+
+"cost":120,
+        "bookingLinks": [      "https://www.booking.com/hotel/hilton",      "https://www.expedia.com/hotel/hilton",      "https://www.hotels.com/hotel/hilton"    ]
+  },
+  {
+    "name": "Marriott Hotel",
+    "description": "A stylish hotel with excellent amenities",
+    "cost":120,
+    "bookingLinks": [
+      "https://www.booking.com/hotel/marriott",
+      "https://www.expedia.com/hotel/marriott",
+      "https://www.hotels.com/hotel/marriott"
+    ]
+
+  },
+  {
+    "name": "Hyatt Regency",
+    "description": "A top-rated hotel with great views of the city",
+    "cost":120,
+    "bookingLinks": [
+      "https://www.booking.com/hotel/hyatt-regency",
+      "https://www.expedia.com/hotel/hyatt-regency",
+      "https://www.hotels.com/hotel/hyatt-regency"
+    ]
+  }
+]

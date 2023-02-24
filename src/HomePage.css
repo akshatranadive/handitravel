@@ -1,10 +1,8 @@
-@import url('https://fonts.google.com/specimen/Poppins');
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
 
 body {
-    font-family: 'Poppins', sans-serif;
-    margin-left: 2rem;
-    margin-right: 2rem;
-}
+    font-family: 'Poppins';
+  }
 
 .bg-blue {
   background-color: rgb(148, 36, 131);
@@ -19,7 +17,7 @@ body {
 }
 
 .nav-link:hover {
-  color: rgb(255, 53, 53);
+  color: rgb(255, 255, 255);
 }
 
 /* .navbar-nav {
