@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import HomePage from './HomePage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 // import LoginPage from './components/LoginPage';
 // import GuidesPage from './components/GuidesPage';
 // import CommunityPage from './components/CommunityPage';
@@ -10,12 +11,15 @@ import './App.css';
 import { Navbar, Nav } from 'react-bootstrap';
 import { FaCog } from 'react-icons/fa';
 import HotelPage from './HotelPage';
+import FlightPage from './FlightPage';
 //import { TiPlaneOutline, TiHotel, TiBus } from 'react-icons/ti';
 
 
 function App() {
   return (
     <Router>
+          <link href="https://fonts.googleapis.com/css2?family=Alegreya" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins" rel="stylesheet"/>
       <div className="App">
       <Navbar sticky="top" bg="primary" variant="dark" expand="lg" className="navbar">
           <Navbar.Brand as={Link} to="/" className='mx-3'>
@@ -43,14 +47,14 @@ function App() {
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link as={Link} to="/flights">
-                   Flights
+                   Commute
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item>
+              {/* <Nav.Item>
                 <Nav.Link as={Link} to="/buses">
                    Buses
                 </Nav.Link>
-              </Nav.Item>
+              </Nav.Item> */}
 
             </Nav>
             <Nav className=''>
@@ -78,8 +82,8 @@ function App() {
           <Route path="/hotels">
             <HotelPage />
           </Route>
-          <Route path="/community">
-            {/* <CommunityPage /> */}
+          <Route path="/flights">
+            <FlightPage/>
           </Route>
           <Route path="/aboutus">
             {/* <AboutUsPage /> */}

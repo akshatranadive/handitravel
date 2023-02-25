@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Card, Button, ListGroup, ListGroupItem } from "react-bootstrap";
 import { BiDownArrow, BiUpArrow } from 'react-icons/bi';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function HotelPage() {
@@ -122,8 +122,8 @@ function HotelPage() {
     .then(response => {
       let res = response.data;
       //change
-      //let filteredHotels = res.filter(hotel => hotel.type == selectedValue && hotel.country == selectedCountry);
-      let sorted = [...res].sort((b ,a) => b.bestPrice - a.bestPrice);
+      let filteredHotels = res.filter(hotel => hotel.type == selectedValue && hotel.country == selectedCountry);
+      let sorted = [...filteredHotels].sort((b ,a) => b.bestPrice - a.bestPrice);
       setHotels(sorted);
     })
     .catch(error => {
