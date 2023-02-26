@@ -57,7 +57,7 @@ function App() {
               </Nav.Item> */}
 
             </Nav>
-            <Nav className=''>
+            {/* <Nav className=''>
               <Nav.Item>
                 <Nav.Link as={Link} to="/login">Log In</Nav.Link>
               </Nav.Item>
@@ -69,7 +69,7 @@ function App() {
                   <FaCog className="settings-icon" />
                 </Nav.Link>
               </Nav.Item>
-            </Nav>
+            </Nav> */}
           </Navbar.Collapse>
         </Navbar>
         <Switch>
