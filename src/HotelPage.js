@@ -12,7 +12,7 @@ function HotelPage() {
   const [destination, setDestination] = useState('');
   const [checkin, setCheckin] = useState('');
   const [checkout, setCheckout] = useState('');
-  const [numOfPeople, setNumOfPeople] = useState('');
+  const [numOfPeople, setNumOfPeople] = useState(1);
   const [budget, setBudget] = useState('');
   const [disability, setDisability] = useState([]);
   let [selectedDisability, setSelectedDisability] = useState([]);
@@ -267,7 +267,10 @@ function HotelPage() {
           people={numOfPeople}
           ammenities={hotel.ammenities}
         />
-      )) : <p className="col-md-10">No records found!</p>}
+       )) : 
+      //  <p className="col-md-10">No records found!</p>
+      null
+        }
         </div>
     </div>
     </div>
