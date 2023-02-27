@@ -62,6 +62,7 @@ function FlightPage() {
     if (e.target.value === 'one-way') {
       setReturnDate('');
     }
+    setFlight([]);
   };
 
   const handleExchangeClickBus = () => {

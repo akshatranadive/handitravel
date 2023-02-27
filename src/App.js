@@ -9,28 +9,37 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import SettingsPage from './components/SettingsPage';
 import './App.css';
 import { Navbar, Nav } from 'react-bootstrap';
-import { FaCog } from 'react-icons/fa';
 import HotelPage from './HotelPage';
 import FlightPage from './FlightPage';
-//import { TiPlaneOutline, TiHotel, TiBus } from 'react-icons/ti';
-
+import logo from './assets/logo.jpeg';
+import logotext from './assets/logotext.png';
 
 function App() {
   return (
     <Router>
-          <link href="https://fonts.googleapis.com/css2?family=Alegreya" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins" rel="stylesheet"/>
       <div className="App">
       <Navbar sticky="top" bg="primary" variant="dark" expand="lg" className="navbar">
           <Navbar.Brand as={Link} to="/" className='mx-3'>
-          <span className="ml-5 handi-travel">Handi Travel</span>
+          <img
+            src={logo}
+            height="50"
+            className="d-inline-block align-top"
+            alt="Logo"
+          />
+          <img
+            src={logotext}
+            height="30"
+            className="d-inline-block align-top ms-3 mt-2"
+            alt="Logo"
+          />
+          {/* <span className="ml-5 handi-travel">Handi Travel</span> */}
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-3">
-              <Nav.Item>
+              {/* <Nav.Item>
                 <Nav.Link as={Link} to="/" exact>Home</Nav.Link>
-              </Nav.Item>
+              </Nav.Item> */}
               {/* <Nav.Item>
                 <Nav.Link as={Link} to="/guides">Guides</Nav.Link>
               </Nav.Item>
@@ -46,7 +55,7 @@ function App() {
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link as={Link} to="/flights">
+                <Nav.Link as={Link} to="/commute">
                    Commute
                 </Nav.Link>
               </Nav.Item>
@@ -82,7 +91,7 @@ function App() {
           <Route path="/hotels">
             <HotelPage />
           </Route>
-          <Route path="/flights">
+          <Route path="/commute">
             <FlightPage/>
           </Route>
           <Route path="/aboutus">
