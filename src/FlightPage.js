@@ -363,7 +363,7 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
               <Col></Col>
               <Col></Col>
               <Col>
-                <h5>${cost}/person </h5>
+                <h5>€{cost}/person </h5>
               </Col>
             </Row>
             <Row>
@@ -403,8 +403,8 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
                 </Col>
               </Row>
             <Row>
-                <Col>
-                Grand Total: {people * cost}
+                <Col className='fw-bolder'>
+                Grand Total: €{people * cost}
                 </Col>
               </Row>
           </Card.Body>
@@ -430,7 +430,7 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
               <Col></Col>
               <Col></Col>
                 <Col>
-                  <h5>${cost}/person</h5>
+                  <h5>€{cost}/person</h5>
                 </Col>
               </Row>
               <Row>
@@ -469,8 +469,8 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
                 </Col>
               </Row>
               <Row>
-                <Col>
-                Grand Total: {people * cost}
+                <Col className='fw-bolder'>
+                Grand Total: €{people * cost}
                 </Col>
               </Row>
             </Card.Body>
@@ -492,7 +492,7 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
               <Col></Col>
               <Col></Col>
                 <Col>
-                  <h5>${cost}/person</h5>
+                  <h5>€{cost}/person</h5>
                 </Col>
               </Row>
               <Row>
@@ -531,8 +531,8 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
                 </Col>
               </Row>
               <Row>
-                <Col>
-                Grand Total: {people * cost}
+                <Col className='fw-bolder'>
+                Grand Total: €{people * cost}
                 </Col>
               </Row>
             </Card.Body>
@@ -581,19 +581,19 @@ let BusCard = ({ airline, departureBus, arrivalBus, duration, disabledAmenities,
             </Row>
             <Row>
                 <Col>
-                Book Now: <a href={"https://www.booking.com/"+{airline}} target="_blank" rel="noreferrer">
-                {"https://www.booking.com/"+airline}
+                Book Now: <a href={"https://www.booking.com/"} target="_blank" rel="noreferrer">
+                {"https://www.booking.com"}
               </a>
                 </Col>
               </Row>
             <Row>
                 <Col>
-                Cost: ${cost}
+                Cost: €{cost}
                 </Col>
               </Row>
             <Row>
-                <Col>
-                Grand Total: {people * cost}
+                <Col className='fw-bolder'>
+                Grand Total: €{people * cost}
                 </Col>
               </Row>
           </Card.Body>

@@ -13,6 +13,8 @@ import HotelPage from './HotelPage';
 import FlightPage from './FlightPage';
 import logo from './assets/logo.jpeg';
 import logotext from './assets/logotext.png';
+import logoup from './assets/logoup.png';
+
 
 function App() {
   return (
@@ -21,7 +23,7 @@ function App() {
       <Navbar sticky="top" bg="primary" variant="dark" expand="lg" className="navbar">
           <Navbar.Brand as={Link} to="/" className='mx-3'>
           <img
-            src={logo}
+            src={logoup}
             height="50"
             className="d-inline-block align-top"
             alt="Logo"

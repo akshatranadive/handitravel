@@ -185,7 +185,7 @@ function HotelPage() {
           </div>
           <div className="col-md-2">
             <div className='fw-bolder text-primary'>Budget/night</div>
-            <input type="number" className="form-control" placeholder="$100, $200..." value={budget} onChange={(e) => setBudget(e.target.value)} />
+            <input type="number" className="form-control" placeholder="€100, €200..." value={budget} onChange={(e) => setBudget(e.target.value)} />
           </div>
         </div>
         <div className='row my-3'>
@@ -282,10 +282,10 @@ export default HotelPage;
 function HotelCard({ hotelName, accomodationType, bestPrice, price1, price2, price3, country, location, ammenities, days, people }) {
     const [isExpanded, setIsExpanded] = useState(false);
   const [hotelLinks, setHotelLinks] = useState([
-    { website: "www.bestprice.com/"+hotelName, cost: "       $" + bestPrice },
-    { website: "www.booking.com/"+hotelName, cost: "       $" + price1 },
-    { website: "www.expedia/"+hotelName, cost: "       $" + price2 },
-    { website: "www.tripAdvisor/"+hotelName, cost: "       $" + price3 }
+    { website: "www.bestprice.com/"+hotelName, cost: "       €" + bestPrice },
+    { website: "www.booking.com/"+hotelName, cost: "       €" + price1 },
+    { website: "www.expedia/"+hotelName, cost: "       €" + price2 },
+    { website: "www.tripAdvisor/"+hotelName, cost: "       €" + price3 }
   ]);
   // let amenities = test.split(',');
   // amenities = [
@@ -311,7 +311,7 @@ function HotelCard({ hotelName, accomodationType, bestPrice, price1, price2, pri
     <Card.Body>
       <Card.Title>{hotelName}</Card.Title>
       <Card.Subtitle className="mb-2 text-muted">
-        Best Price/night: ${bestPrice}<br></br>
+        Best Price/night: €{bestPrice}<br></br>
         Accomodation Type: {accomodationType}
       </Card.Subtitle>
       <Card.Text className='fw-bold'>Amenities:</Card.Text>
@@ -321,7 +321,7 @@ function HotelCard({ hotelName, accomodationType, bestPrice, price1, price2, pri
               ))}
             </ul>
       <Card.Text className='fw-bold' >Destination: <span className='fw-light'>{location}, {country}</span></Card.Text>
-      <Card.Text className='fw-bold'>Grand Total: <span className='fw-light'><span className='fw-bold'>{bestPrice}</span>(Best Price)*<span className='fw-bold'>{days}</span>(Number of nights)*<span className='fw-bold'>{people}</span>(Number of people) = </span><span className='fw-bold'>${grandtotal}</span></Card.Text>
+      <Card.Text className='fw-bold'>Grand Total: <span className='fw-light'><span className='fw-bold'>{bestPrice}</span>(Best Price)*<span className='fw-bold'>{days}</span>(Number of nights)*<span className='fw-bold'>{people}</span>(Number of people) = </span><span className='fw-bold'>€{grandtotal}</span></Card.Text>
       <Button variant="primary" onClick={handleExpansion}>
         {isExpanded ? <BiUpArrow/> : <BiDownArrow/>}
       </Button>

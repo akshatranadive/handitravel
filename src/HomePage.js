@@ -2,6 +2,7 @@ import { Card, Col, Container, Row } from 'react-bootstrap';
 import './App.css'; // Import custom styles for the App component
 import hotels from './assets/hotels.jpg';
 import commute from './assets/commute.jpg';
+import logoup from './assets/logoup.png';
 import happy from './assets/happy.jpg';
 
 const Homepage = () =>{
@@ -23,15 +24,7 @@ const Homepage = () =>{
           <h1>Welcome to Handi Travel!!</h1>
           <p>We are dedicated to providing the best travel options for people with disabilities.</p>
           
-          <h2>Our Features</h2>
-          <ul>
-            <li>Easy-to-use interface</li>
-            <li>Search and compare prices for hotels, flights, and buses</li>
-            <li>Customizable options for accessibility needs</li>
-            <li>Easy-to-use interface</li>
-            <li>Search and compare prices for hotels, flights, and buses</li>
-            <li>Customizable options for accessibility needs</li>
-          </ul>
+          
         </div>
         
         <div>
@@ -75,6 +68,15 @@ const Homepage = () =>{
         
         </div>
         <div className='my-5'>
+        <h2>Our Features</h2>
+          <ul>
+            <li>Easy-to-use interface</li>
+            <li>Search and compare prices for hotels, flights, and buses</li>
+            <li>Customizable options for accessibility needs</li>
+            <li>Easy-to-use interface</li>
+            <li>Search and compare prices for hotels, flights, and buses</li>
+            <li>Customizable options for accessibility needs</li>
+          </ul>
           <br />
           <h2>Booking for Disabled</h2>
           <p>We understand the unique challenges that people with disabilities face when traveling, and we strive to make the process as smooth and stress-free as possible. Our website offers a variety of features specifically tailored to the needs of people with disabilities, including:</p>
