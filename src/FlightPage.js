@@ -1,23 +1,25 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Tabs, Tab, Card, Row, Col } from 'react-bootstrap';
 import { FaExchangeAlt, FaPlaneArrival, FaPlaneDeparture, FaBusAlt } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { InputContext } from './InputContext';
 
 function FlightPage() {
   const [key, setKey] = useState('flight');
-  const [departure, setDeparture] = useState('');
-  const [arrival, setArrival] = useState('');
-  const [departDate, setDepartDate] = useState('');
-  const [returnDate, setReturnDate] = useState('');
-  const [numPeople, setNumPeople] = useState(1);
+  const {departureIn, setDepartureIn,arrivalIn, setArrivalIn,departDateIn, setDepartDateIn,returnDateIn, setReturnDateIn,numPeopleIn, setNumPeopleIn} = useContext(InputContext);
+  const [departure, setDeparture] = useState(departureIn);
+  const [arrival, setArrival] = useState(arrivalIn);
+  const [departDate, setDepartDate] = useState(departDateIn);
+  const [returnDate, setReturnDate] = useState(returnDateIn);
+  const [numPeople, setNumPeople] = useState(numPeopleIn);
   const [tripType, setTripType] = useState('round-trip');
   const [flights, setFlight] = useState([]);
-  const [departureBus, setDepartureBus] = useState('');
-  const [arrivalBus, setArrivalBus] = useState('');
-  const [departDateBus, setDepartDateBus] = useState('');
-  const [returnDateBus, setReturnDateBus] = useState('');
-  const [numPeopleBus, setNumPeopleBus] = useState(1);
+  const [departureBus, setDepartureBus] = useState(departureIn);
+  const [arrivalBus, setArrivalBus] = useState(arrivalIn);
+  const [departDateBus, setDepartDateBus] = useState(departDateIn);
+  const [returnDateBus, setReturnDateBus] = useState(returnDate);
+  const [numPeopleBus, setNumPeopleBus] = useState(numPeopleIn);
   const [buses, setBuses] = useState([]);
 
 
@@ -55,12 +57,15 @@ function FlightPage() {
     const temp = departure;
     setDeparture(arrival);
     setArrival(temp);
+    // setDepartureIn(arrival);
+    // setArrivalIn(temp);
   };
 
   const handleTripTypeChange = (e) => {
     setTripType(e.target.value);
     if (e.target.value === 'one-way') {
       setReturnDate('');
+      setReturnDateIn('');
     }
     setFlight([]);
   };
@@ -69,17 +74,47 @@ function FlightPage() {
     const temp = departureBus;
     setDepartureBus(arrivalBus);
     setArrivalBus(temp);
+    // setDepartureIn(arrivalBus);
+    // setArrivalIn(temp);
   };
 
   const handleTripTypeChangeBus = (e) => {
     setTripType(e.target.value);
     if (e.target.value === 'one-way') {
       setReturnDateBus('');
+      setReturnDateIn('');
     }
   };
 
   let handleSearchSubmit = (e) => {
     e.preventDefault();
+    if(key=='flight'){
+      setDepartureIn(departure);
+    setArrivalIn(arrival);
+    setDepartDateIn(departDate);
+    setReturnDateIn(returnDate);
+    setNumPeopleIn(numPeople);
+    setDepartureBus(departure);
+    setArrivalBus(arrival);
+    setDepartDateBus(departDate);
+    setReturnDateBus(returnDate);
+    setNumPeopleBus(numPeople);
+  }
+  else if(key=='bus'){
+    setDepartureIn(departure);
+    setArrivalIn(arrival);
+    setDepartDateIn(departDate);
+    setReturnDateIn(returnDate);
+    setNumPeopleIn(numPeople);
+    setArrival(arrivalBus);
+    setDepartDate(departDateBus);
+    setReturnDate(returnDateBus);
+    setNumPeople(numPeopleBus);
+  }
+
+    console.log("departure", departure);
+    console.log("IN", departureIn);
+    // console.log("departure", depature);
     const searchType = key;
     if(key=='flight'){
       

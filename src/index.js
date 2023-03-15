@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import HomePage from './HomePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './i18n.js';
+import fr from "./translations/fr";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -14,11 +14,13 @@ import FlightPage from './FlightPage';
 import logo from './assets/logo.jpeg';
 import logotext from './assets/logotext.png';
 import logoup from './assets/logoup.png';
+import { InputProvider } from './InputContext';
 
 
 function App() {
   return (
     <Router>
+      <InputProvider>
       <div className="App">
       <Navbar sticky="top" bg="primary" variant="dark" expand="lg" className="navbar">
           <Navbar.Brand as={Link} to="/" className='mx-3'>
@@ -52,8 +54,8 @@ function App() {
                 <Nav.Link as={Link} to="/aboutus">About Us</Nav.Link>
               </Nav.Item> */}
               <Nav.Item>
-                <Nav.Link as={Link} to="/hotels">
-                   Hotels
+                <Nav.Link as={Link} to="/accommodation">
+                accommodation
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
@@ -90,7 +92,7 @@ function App() {
           <Route path="/login">
             {/* <LoginPage /> */}
           </Route>
-          <Route path="/hotels">
+          <Route path="/accommodation">
             <HotelPage />
           </Route>
           <Route path="/commute">
@@ -104,6 +106,7 @@ function App() {
           </Route>
         </Switch>
       </div>
+      </InputProvider>
     </Router>
   );
 }

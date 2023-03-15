@@ -1,18 +1,21 @@
 import './HotelPage.css';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Card, Button, ListGroup, ListGroupItem } from "react-bootstrap";
 import { BiDownArrow, BiUpArrow } from 'react-icons/bi';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { InputContext } from './InputContext';
+
 
 
 function HotelPage() {
   let counter = 0;
-  const [destination, setDestination] = useState('');
-  const [checkin, setCheckin] = useState('');
-  const [checkout, setCheckout] = useState('');
-  const [numOfPeople, setNumOfPeople] = useState(1);
+  const {departureIn, setDepartureIn,arrivalIn, setArrivalIn,departDateIn, setDepartDateIn,returnDateIn, setReturnDateIn,numPeopleIn, setNumPeopleIn} = useContext(InputContext);
+  const [destination, setDestination] = useState(departureIn);
+  const [checkin, setCheckin] = useState(departDateIn);
+  const [checkout, setCheckout] = useState(returnDateIn);
+  const [numOfPeople, setNumOfPeople] = useState(numPeopleIn);
   const [budget, setBudget] = useState('');
   const [disability, setDisability] = useState([]);
   let [selectedDisability, setSelectedDisability] = useState([]);
@@ -42,6 +45,13 @@ function HotelPage() {
   let handleSubmit = (e) => {
     counter++;
     e.preventDefault();
+
+    // setDepartureIn(departure);
+    setArrivalIn(destination);
+    setDepartDateIn(checkin);
+    setReturnDateIn(checkout);
+    setNumPeopleIn(numOfPeople);
+
   if (!destination || !checkout || !checkin || !numOfPeople) {
     setErrorMessage("Please fill in all fields.");
   } 
@@ -61,62 +71,7 @@ function HotelPage() {
       // selectedValue: selectedValue
     };
     
-  
-    // let hotels = [
-    //   {
-    //     Accomodations: 'Hotel A',
-    //     Type:'Hotel',
-    //     bestPrice: 100,
-    //     price1:100,
-    //     price2:300,
-    //     price3:600,
-    //     Ammenities:["paraplegic", "deaf"],
-    //     Country:'UAE',
-    //     Location:'Nova scotia'
-  
-    //   },
-    //   {
-    //     Accomodations: 'Hotel B',
-    //     Type:'Hotel',
-    //     bestPrice: 200,
-    //     price1:300,
-    //     price2:700,
-    //     price3:100,
-    //     Ammenities:["deaf"],
-    //     Country:'France',
-    //     Location:'Nova scotia'
-    //   },
-    //   {
-    //     Accomodations: 'Hotel C',
-    //     Type:'Motel',
-    //     bestPrice: 150,
-    //     price1:800,
-    //     price2:200,
-    //     price3:100,
-    //     Ammenities:["paraplegic"],
-    //     Country:'Canada',
-    //     Location:'Nova scotia'
-    //   }
-    // ];
 
-      //hotels = filterHotelsByAccommodationType(hotels, selectedValue);
-      
-      //filteredHotels = hotels.filter((hotel) => selectedDisability.every((disability) => hotel.disability.includes(disability)) );
-      // let disabilityFilteredHotels = [];
-      // for (let j = 0; j < hotels.length; j++) {
-      //   for (let i = 0; i < selectedDisability.length; i++) {
-      //     let disabilities = hotels[0].disability;
-      //     if (!disabilities.includes(selectedDisability[i])) {
-      //       continue;
-      //     }
-      //     else{
-      //       disabilityFilteredHotels.push()
-      //     }
-      // }
-      // }
-    
-
-    //setHotels(filteredHotels);
 
     axios.get('http://localhost:2023/hotel', { params: searchParams })
     .then(response => {
@@ -169,7 +124,7 @@ function HotelPage() {
           </div>
           <div className="col-md-2">
             <div className='fw-bolder text-primary'>Location</div>
-            <input type="text" className="form-control" placeholder="Where to?" value={destination} onChange={(e) => setDestination(e.target.value)} />
+            <input type="text" className="form-control" placeholder="Where to?" value={destination} onChange={(e) => {setDestination(e.target.value);}} />
           </div>
           <div className="col-md-2">
           <div className='fw-bolder text-primary'>Check in</div>
@@ -281,11 +236,16 @@ export default HotelPage;
 
 function HotelCard({ hotelName, accomodationType, bestPrice, price1, price2, price3, country, location, ammenities, days, people }) {
     const [isExpanded, setIsExpanded] = useState(false);
-  const [hotelLinks, setHotelLinks] = useState([
-    { website: "www.bestprice.com/"+hotelName, cost: "       €" + bestPrice },
-    { website: "www.booking.com/"+hotelName, cost: "       €" + price1 },
-    { website: "www.expedia/"+hotelName, cost: "       €" + price2 },
-    { website: "www.tripAdvisor/"+hotelName, cost: "       €" + price3 }
+    let grandtotal = days*people*bestPrice;
+    let grandtotal1 = days*people*price1;
+    let grandtotal2 = days*people*price2;
+    let grandtotal3 = days*people*price3;
+
+  let [hotelLinks, setHotelLinks] = useState([
+    { website: "www.bestprice.com/"+hotelName, cost: "       Grand Total: €" },
+    { website: "www.booking.com/"+hotelName, cost: "       Grand Total: €" },
+    { website: "www.expedia.com/"+hotelName, cost: "       Grand Total: €" },
+    { website: "www.tripAdvisor.com/"+hotelName, cost: "       Grand Total: €" }
   ]);
   // let amenities = test.split(',');
   // amenities = [
@@ -300,7 +260,6 @@ function HotelCard({ hotelName, accomodationType, bestPrice, price1, price2, pri
   //   "Laundry facilities",
   //   "Free parking",
   // ];
-  let grandtotal = days*people*bestPrice;
 
   const handleExpansion = () => {
     setIsExpanded(!isExpanded);
@@ -328,14 +287,32 @@ function HotelCard({ hotelName, accomodationType, bestPrice, price1, price2, pri
       {isExpanded && (
         <ListGroup className="mt-3">
           <Card.Text ><span className='fw-bold'>Compare prices : </span></Card.Text>
-          {hotelLinks.map((link, index) => (
-            <ListGroupItem key={index}>
-              <a href={"https://"+link.website} target="_blank" rel="noreferrer">
-                {link.website}
+          {/* {hotelLinks.map((link, index) => ( */}
+            <ListGroupItem >
+              <a href={"https://www.bestprice.com/"+{hotelName}} target="_blank" rel="noreferrer">
+                www.bestprice.com/{hotelName}
               </a>
-              <span className="float-right">{link.cost}</span>
+              <span className="float-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grand Total:  €{grandtotal}</span>
             </ListGroupItem>
-          ))}
+            <ListGroupItem >
+              <a href={"https://www.booking.com/"+{hotelName}} target="_blank" rel="noreferrer">
+              www.booking.com/{hotelName}
+              </a>
+              <span className="float-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grand Total:  €{grandtotal1}</span>
+            </ListGroupItem>
+            <ListGroupItem >
+              <a href={"https://www.expedia.com/"+{hotelName}} target="_blank" rel="noreferrer">
+              www.expedia.com/{hotelName}
+              </a>
+              <span className="float-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grand Total:  €{grandtotal2}</span>
+            </ListGroupItem>
+            <ListGroupItem >
+              <a href={"https://www.tripAdvisor.com/"+{hotelName}} target="_blank" rel="noreferrer">
+              www.tripAdvisor.com/{hotelName}
+              </a>
+              <span className="float-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grand Total:  €{grandtotal3}</span>
+            </ListGroupItem>
+           {/* ))} */}
         </ListGroup>
       )}
     </Card.Body>
