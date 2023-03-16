@@ -115,25 +115,22 @@ function HotelPage() {
   return (
     <div className="container">
 
-       <select value={currentLanguage} onChange={handleLanguageChange}>
-      <option value="en">{t('English')}</option>
-      <option value="fr">{t('Français')}</option>
-    </select>
+     
       <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-md-1 ">
             <div className='fw-bolder text-primary'>{t("Hotel")}</div>
             <DropdownButton className='text-white' id="my-dropdown" title={selectedValue} onSelect={handleDropdownSelect}>
-            <Dropdown.Item eventKey="Hotel">{t("Hotel")}</Dropdown.Item>
-            <Dropdown.Item eventKey="Motel">{t("Motel")}</Dropdown.Item>
-            <Dropdown.Item eventKey="Zostel">{t("Zostel")}</Dropdown.Item>
-            <Dropdown.Item eventKey="Homestays">{t("Homestays")}</Dropdown.Item>
+            <Dropdown.Item eventKey={t("Hotel")}>{t("Hotel")}</Dropdown.Item>
+            <Dropdown.Item eventKey={t("Motel")}>{t("Motel")}</Dropdown.Item>
+            <Dropdown.Item eventKey={t("Zotel")}>{t("Zostel")}</Dropdown.Item>
+            <Dropdown.Item eventKey={t("Homestays")}>{t("Homestays")}</Dropdown.Item>
             </DropdownButton>
           </div>
           <div className="col-md-1 ">
             <div className='fw-bolder text-primary'>{t("country")}</div>
             <DropdownButton className='text-white' id="my-dropdown" title={selectedCountry} onSelect={handleCountryDropdownSelect}>
-            <Dropdown.Item eventKey="UAE">{t("uae")}</Dropdown.Item>
+            <Dropdown.Item eventKey="UAE">UAE</Dropdown.Item>
             <Dropdown.Item eventKey="Canada">Canada</Dropdown.Item>
             <Dropdown.Item eventKey="France">France</Dropdown.Item>
             </DropdownButton>

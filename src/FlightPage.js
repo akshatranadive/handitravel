@@ -4,8 +4,12 @@ import { Tabs, Tab, Card, Row, Col } from 'react-bootstrap';
 import { FaExchangeAlt, FaPlaneArrival, FaPlaneDeparture, FaBusAlt } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { InputContext } from './InputContext';
+import { useTranslation, Translation } from "react-i18next";
+import i18n from 'i18next';
 
 function FlightPage() {
+  const { t } = useTranslation();
+  const currentLanguage = i18n.language;
   const [key, setKey] = useState('flight');
   const {departureIn, setDepartureIn,arrivalIn, setArrivalIn,departDateIn, setDepartDateIn,returnDateIn, setReturnDateIn,numPeopleIn, setNumPeopleIn} = useContext(InputContext);
   const [departure, setDeparture] = useState(departureIn);
@@ -59,6 +63,10 @@ function FlightPage() {
     setArrival(temp);
     // setDepartureIn(arrival);
     // setArrivalIn(temp);
+  };
+  const handleLanguageChange = (event) => {
+    console.log("language: "+event.target.value)
+    i18n.changeLanguage(event.target.value);
   };
 
   const handleTripTypeChange = (e) => {
@@ -167,17 +175,18 @@ function FlightPage() {
 
   return (
     <div className="container">
+       
             <Tabs
         id="search-tabs"
         activeKey={key}
         onSelect={(k) => setKey(k)}
       >
-        <Tab eventKey="flight" title="Flights">
+        <Tab eventKey="flight" title={t("flight")}>
           <form onSubmit={handleSearchSubmit}>
             <div className="row my-3">
               <div className="form-group col-md-2">
-                <label htmlFor="departure" className='fw-bolder text-primary'>Departure</label>
-                  <input type="text" id="departure" name="departure" className="form-control" placeholder="e.g. New York" value={departure} onChange={(e) => setDeparture(e.target.value)} />
+                <label htmlFor="departure" className='fw-bolder text-primary'>{t("Departure")}</label>
+                  <input type="text" id="departure" name="departure" className="form-control" placeholder={t("egNY")} value={departure} onChange={(e) => setDeparture(e.target.value)} />
               </div>
               <div className="form-group col-md-1 mt-4">
                     <button type="button" className="btn btn-outline-primary" onClick={handleExchangeClick}>
@@ -185,25 +194,25 @@ function FlightPage() {
                     </button>
                   </div>
               <div className="form-group col-md-2">
-                <label htmlFor="arrival" className='fw-bolder text-primary'>Arrival</label>
-                  <input type="text" id="arrival" name="arrival" className="form-control" placeholder="e.g. Los Angeles" value={arrival} onChange={(e) => setArrival(e.target.value)} />
+                <label htmlFor="arrival" className='fw-bolder text-primary'>{t("Arrival")}</label>
+                  <input type="text" id="arrival" name="arrival" className="form-control" placeholder={t("egLA")} value={arrival} onChange={(e) => setArrival(e.target.value)} />
                 </div>
               <div className="form-group col-md-2">
-                <label htmlFor="depart-date" className='fw-bolder text-primary'>Depart Date</label>
+                <label htmlFor="depart-date" className='fw-bolder text-primary'>{t("Departdate")}</label>
                 <input type="date" id="depart-date" name="depart-date" className="form-control" value={departDate} onChange={(e) => setDepartDate(e.target.value)} />
               </div>
               <div className="form-group col-md-2">
-                <label htmlFor="return-date" className='fw-bolder text-primary'>Return Date</label>
+                <label htmlFor="return-date" className='fw-bolder text-primary'>{t("returndate")}</label>
                 <input type="date" id="return-date" name="return-date" className="form-control" value={returnDate} onChange={(e) => setReturnDate(e.target.value)} disabled={tripType === 'one-way'} />
               </div>
               <div className="form-group col-md-2">
-                <label htmlFor="num-people" className='fw-bolder text-primary'>Num of People</label>
+                <label htmlFor="num-people" className='fw-bolder text-primary'>{t("numofp")}</label>
                 <input type="number" id="num-people" name="num-people" className="form-control" value={numPeople} onChange={(e) => setNumPeople(e.target.value)} />
               </div>
             </div>
             <div className='row'>
             <div classname="mb-2">
-              <label className='fw-bolder text-primary'>Trip Type</label>
+              <label className='fw-bolder text-primary'>{t("triptype")}</label>
               <div classname="form-check">
                 <input
                   classname="form-check-input"
@@ -215,7 +224,7 @@ function FlightPage() {
                   defaultChecked
                 />
                 <label classname="form-check-label" htmlFor="round-trip">
-                  Round Trip
+                {t("roundtrip")}
                 </label>
               </div>
               <div classname="form-check">
@@ -228,12 +237,12 @@ function FlightPage() {
                   onClick={handleTripTypeChange}
                 />
                 <label classname="form-check-label" htmlFor="one-way">
-                  One Way
+                {t("oneway")}
                 </label>
               </div>
             </div>
             </div>
-            <button type="submit" className="btn btn-primary my-2">Search</button>
+            <button type="submit" className="btn btn-primary my-2"> {t("search")}</button>
           </form>
           <div className='row my-2'>
             
@@ -276,12 +285,12 @@ function FlightPage() {
              </div>
              
         </Tab>
-        <Tab eventKey="bus" title="Buses">
+        <Tab eventKey="bus" title={t("buses")}>
           <form onSubmit={handleSearchSubmit}>
             <div className="row my-3">
               <div className="form-group col-md-2">
-                <label htmlFor="departureBus" className='fw-bolder text-primary'>From</label>
-                  <input type="text" id="departureBus" name="departureBus" className="form-control" placeholder="e.g. New York" value={departureBus} onChange={(e) => setDepartureBus(e.target.value)} />
+                <label htmlFor="departureBus" className='fw-bolder text-primary'>{t("from")}</label>
+                  <input type="text" id="departureBus" name="departureBus" className="form-control" placeholder={t("egNY")} value={departureBus} onChange={(e) => setDepartureBus(e.target.value)} />
               </div>
               <div className="form-group col-md-1 mt-4">
                     <button type="button" className="btn btn-outline-primary" onClick={handleExchangeClickBus}>
@@ -289,19 +298,19 @@ function FlightPage() {
                     </button>
                   </div>
               <div className="form-group col-md-2">
-                <label htmlFor="arrivalBus" className='fw-bolder text-primary'>To</label>
-                  <input type="text" id="arrivalBus" name="arrivalBus" className="form-control" placeholder="e.g. Los Angeles" value={arrivalBus} onChange={(e) => setArrivalBus(e.target.value)} />
+                <label htmlFor="arrivalBus" className='fw-bolder text-primary'>{t("to")}</label>
+                  <input type="text" id="arrivalBus" name="arrivalBus" className="form-control" placeholder={t("egLA")} value={arrivalBus} onChange={(e) => setArrivalBus(e.target.value)} />
                 </div>
               <div className="form-group col-md-2">
-                <label htmlFor="depart-date" className='fw-bolder text-primary'>Depart Date</label>
+                <label htmlFor="depart-date" className='fw-bolder text-primary'>{t("Departdate")}</label>
                 <input type="date" id="depart-date" name="depart-date" className="form-control" value={departDateBus} onChange={(e) => setDepartDateBus(e.target.value)} />
               </div>
               <div className="form-group col-md-2">
-                <label htmlFor="return-date" className='fw-bolder text-primary'>Return Date</label>
+                <label htmlFor="return-date" className='fw-bolder text-primary'>{t("returndate")}</label>
                 <input type="date" id="return-date" name="return-date" className="form-control" value={returnDateBus} onChange={(e) => setReturnDateBus(e.target.value)} />
               </div>
               <div className="form-group col-md-2">
-                <label htmlFor="num-people" className='fw-bolder text-primary'>Num of People</label>
+                <label htmlFor="num-people" className='fw-bolder text-primary'>{t("numofp")}</label>
                 <input type="number" id="num-people" name="num-people" className="form-control" value={numPeopleBus} onChange={(e) => setNumPeopleBus(e.target.value)} />
               </div>
             </div>
@@ -337,7 +346,7 @@ function FlightPage() {
               </div>
             </div> */}
             </div>
-            <button type="submit" className="btn btn-primary my-2">Search</button>
+            <button type="submit" className="btn btn-primary my-2">{t("search")}</button>
           </form>
           <div className='row my-2'>
             

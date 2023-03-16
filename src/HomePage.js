@@ -33,10 +33,7 @@ const Homepage = () =>{
       
       <div className='mx-3'>
         <div className="img">
-        <select value={currentLanguage} onChange={handleLanguageChange}>
-      <option value="en">{t('English')}</option>
-      <option value="fr">{t('Français')}</option>
-    </select>
+       
 
           {/* <h1>Welcome to Handi Travel!!</h1> */}
           <h1>{t("greeting")}</h1>

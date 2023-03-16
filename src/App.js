@@ -48,6 +48,10 @@ function App() {
           />
           {/* <span className="ml-5 handi-travel">Handi Travel</span> */}
           </Navbar.Brand>
+          <select value={currentLanguage} onChange={handleLanguageChange}>
+      <option value="en">{t('English')}</option>
+      <option value="fr">{t('Français')}</option>
+       </select>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-3">

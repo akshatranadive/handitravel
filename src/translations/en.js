@@ -44,6 +44,21 @@ export default {
     "parking":"Accessible parking spots",
     "showerBars":"Roll-in showers with grab bars",
     "w_doorways":"Wide doorways",
+    "flight":"Flights",
+    "buses":"Buses",
+    "Departure":"Departure",
+    "Arrival":"Arrival",
+    "Departdate":" Depart Date",
+    "returndate":"Return Date",
+    "triptype":"Trip Type",
+    "roundtrip":"roundtrip",
+    "oneway":"oneway",
+    "from":"from",
+    "to":"to",
+    "egNY":"e.g. new york",
+    "egLA":"e.g. Los Angeles",
+    
+
 
 // ...
 };

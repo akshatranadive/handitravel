@@ -45,6 +45,19 @@ export default {
           "parking":"Stationnements accessibles",
           "showerBars":"Douches accessibles en fauteuil roulant avec barres d'appui",
           "w_doorways":"Portes larges",
+          "flight":"vols",
+          "buses":"les autobus",
+          "Departure":"départ",
+          "Arrival":"Arrivée",
+          "Departdate":"Date de départ",
+          "returndate":"date de retour",
+          "triptype":"type de voyage",
+          "roundtrip":"aller-retour",
+          "oneway":"Sens Unique",
+          "from":"depuis",
+          "to":"pour",
+          "egNY":"par exemple New York",
+          "egLA":"par exemple Los Angeles",
     // ...
   };
   
