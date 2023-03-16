@@ -85,32 +85,37 @@ const Homepage = () =>{
         
         </div>
         <div className='my-5'>
-        <h2>Our Features</h2>
+        {/* <h2>Our Features</h2> */}
+        <h2>{t("our features")}</h2>
           <ul>
-            <li>Easy-to-use interface</li>
-            <li>Search and compare prices for hotels, flights, and buses</li>
-            <li>Customizable options for accessibility needs</li>
-            <li>Easy-to-use interface</li>
-            <li>Search and compare prices for hotels, flights, and buses</li>
-            <li>Customizable options for accessibility needs</li>
+            {/* <li>Easy-to-use interface</li> */}
+            <li>{t("easy")}</li>
+            {/*<li>Search and compare prices for hotels, flights, and buses</li> */}
+            <li>{t("search")}</li>
+            {/*<li>Customizable options for accessibility needs</li> */}
+            <li>{t("options")}</li>
           </ul>
           <br />
-          <h2>Booking for Disabled</h2>
-          <p>We understand the unique challenges that people with disabilities face when traveling, and we strive to make the process as smooth and stress-free as possible. Our website offers a variety of features specifically tailored to the needs of people with disabilities, including:</p>
+          {/*<h2>Booking for Disabled</h2> */}
+          <h2>{t("booking")}</h2>
+          {/*<p>We understand the unique challenges that people with disabilities face when traveling, and we strive to make the process as smooth and stress-free as possible. Our website offers a variety of features specifically tailored to the needs of people with disabilities, including:</p> */}
+          <p>{t("understand")}</p>
           <ul>
-            <li>Wheelchair accessibility options for hotels, flights, and buses</li>
-            <li>Assistance for hearing or visually impaired travelers</li>
-            <li>Special needs assistance, such as service animals and mobility equipment rental</li>
-            <li>Wheelchair accessibility options for hotels, flights, and buses</li>
-            <li>Assistance for hearing or visually impaired travelers</li>
-            <li>Special needs assistance, such as service animals and mobility equipment rental</li>
+            {/*<li>Wheelchair accessibility options for hotels, flights, and buses</li> */}
+            <li>{t("wheelchair")}</li>
+            {/*<li>Assistance for hearing or visually impaired travelers</li> */}
+            <li>{t("assistance")}</li>
+            {/*<li>Special needs assistance, such as service animals and mobility equipment rental</li> */}
+            <li>{t("special")}</li>
           </ul>
   </div>
 
 
   <div>
-  <h2>Price Comparison</h2>
-  <p>We are committed to providing our users with the best prices for their travel needs. Our website allows you to easily compare prices from different providers, so you can be sure you're getting the best deal. </p>
+  {/*<h2>Price Comparison</h2> */}
+  <h2>{t("price")}</h2>
+  {/*<p>We are committed to providing our users with the best prices for their travel needs. Our website allows you to easily compare prices from different providers, so you can be sure you're getting the best deal. </p> */}
+  <p>{t("commited")}</p>
   </div>
   </div>
   </div>)}
