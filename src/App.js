@@ -15,9 +15,19 @@ import logo from './assets/logo.jpeg';
 import logotext from './assets/logotext.png';
 import logoup from './assets/logoup.png';
 import { InputProvider } from './InputContext';
+import { useTranslation, Translation } from "react-i18next";
+import i18n from 'i18next';
+  
+  const handleLanguageChange = (event) => {
+    console.log("language: "+event.target.value)
+    i18n.changeLanguage(event.target.value);
+  };
 
 
 function App() {
+  const { t } = useTranslation();
+  const currentLanguage = i18n.language;
+
   return (
     <Router>
       <InputProvider>
@@ -55,12 +65,12 @@ function App() {
               </Nav.Item> */}
               <Nav.Item>
                 <Nav.Link as={Link} to="/accommodation">
-                accommodation
+                {t("Accommodation")}
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link as={Link} to="/commute">
-                   Commute
+                {t("Commute")}
                 </Nav.Link>
               </Nav.Item>
               {/* <Nav.Item>

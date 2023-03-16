@@ -6,10 +6,16 @@ import { BiDownArrow, BiUpArrow } from 'react-icons/bi';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { InputContext } from './InputContext';
+import { useTranslation, Translation } from "react-i18next";
+import i18n from 'i18next';
+
 
 
 
 function HotelPage() {
+  const { t } = useTranslation();
+  const currentLanguage = i18n.language;
+
   let counter = 0;
   const {departureIn, setDepartureIn,arrivalIn, setArrivalIn,departDateIn, setDepartDateIn,returnDateIn, setReturnDateIn,numPeopleIn, setNumPeopleIn} = useContext(InputContext);
   const [destination, setDestination] = useState(departureIn);
@@ -32,6 +38,12 @@ function HotelPage() {
     } else {
       setSelectedDisability(selectedDisability.filter((disability) => disability !== value));
     }
+
+   
+  };
+  const handleLanguageChange = (event) => {
+    console.log("language: "+event.target.value)
+    i18n.changeLanguage(event.target.value);
   };
   
 
@@ -102,107 +114,111 @@ function HotelPage() {
 
   return (
     <div className="container">
-      
+
+       <select value={currentLanguage} onChange={handleLanguageChange}>
+      <option value="en">{t('English')}</option>
+      <option value="fr">{t('Français')}</option>
+    </select>
       <form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-md-1 ">
-            <div className='fw-bolder text-primary'>Type</div>
+            <div className='fw-bolder text-primary'>{t("Hotel")}</div>
             <DropdownButton className='text-white' id="my-dropdown" title={selectedValue} onSelect={handleDropdownSelect}>
-            <Dropdown.Item eventKey="Hotel">Hotel</Dropdown.Item>
-            <Dropdown.Item eventKey="Motel">Motel</Dropdown.Item>
-            <Dropdown.Item eventKey="Zostel">Zostel</Dropdown.Item>
-            <Dropdown.Item eventKey="Homestays">Homestays</Dropdown.Item>
+            <Dropdown.Item eventKey="Hotel">{t("Hotel")}</Dropdown.Item>
+            <Dropdown.Item eventKey="Motel">{t("Motel")}</Dropdown.Item>
+            <Dropdown.Item eventKey="Zostel">{t("Zostel")}</Dropdown.Item>
+            <Dropdown.Item eventKey="Homestays">{t("Homestays")}</Dropdown.Item>
             </DropdownButton>
           </div>
           <div className="col-md-1 ">
-            <div className='fw-bolder text-primary'>Country</div>
+            <div className='fw-bolder text-primary'>{t("country")}</div>
             <DropdownButton className='text-white' id="my-dropdown" title={selectedCountry} onSelect={handleCountryDropdownSelect}>
-            <Dropdown.Item eventKey="UAE">UAE</Dropdown.Item>
+            <Dropdown.Item eventKey="UAE">{t("uae")}</Dropdown.Item>
             <Dropdown.Item eventKey="Canada">Canada</Dropdown.Item>
             <Dropdown.Item eventKey="France">France</Dropdown.Item>
             </DropdownButton>
           </div>
           <div className="col-md-2">
-            <div className='fw-bolder text-primary'>Location</div>
-            <input type="text" className="form-control" placeholder="Where to?" value={destination} onChange={(e) => {setDestination(e.target.value);}} />
+            <div className='fw-bolder text-primary'>{t("Location")}</div>
+            <input type="text" className="form-control" placeholder={t("where_to")} value={destination} onChange={(e) => {setDestination(e.target.value);}} />
           </div>
           <div className="col-md-2">
-          <div className='fw-bolder text-primary'>Check in</div>
+          <div className='fw-bolder text-primary'>{t("checkin")}</div>
             <input type="date" className="form-control" placeholder="Checkin" value={checkin} onChange={(e) => setCheckin(e.target.value)} />
           </div>
           <div className="col-md-2">
-          <div className='fw-bolder text-primary'>Check out</div>
+          <div className='fw-bolder text-primary'>{t("checkout")}</div>
             <input type="date" className="form-control" placeholder="Checkout" value={checkout} onChange={(e) => setCheckout(e.target.value)} />
           </div>
           <div className="col-md-2">
-            <div className='fw-bolder text-primary'>Number of people</div>
+            <div className='fw-bolder text-primary'>{t("numofp")}</div>
             <input type="number" className="form-control" placeholder="1,2,3..." value={numOfPeople} onChange={(e) => setNumOfPeople(e.target.value)} />
           </div>
           <div className="col-md-2">
-            <div className='fw-bolder text-primary'>Budget/night</div>
+            <div className='fw-bolder text-primary'>{t("budget/night")}</div>
             <input type="number" className="form-control" placeholder="€100, €200..." value={budget} onChange={(e) => setBudget(e.target.value)} />
           </div>
         </div>
         <div className='row my-3'>
-        <button type="submit" className="btn btn-primary">Search</button>
+        <button type="submit" className="btn btn-primary">{t("search")}</button>
         {errorMessage && <p className='text-danger'>{errorMessage}</p>}
         </div>
       </form>
       <div className='row'>
       <div className="form-group col-md-2 my-3">
-            <label className='fw-bolder text-primary'>Amenities</label>
+            <label className='fw-bolder text-primary'>{t("amenities")}</label>
             <div>
               <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="Visual" value="Visual alarm clocks" checked={selectedDisability.includes("Visual alarm clocks")} onChange={handleCheckboxChange}/>
-                <label className="form-check-label" htmlFor="Visual" >Visual alarm clocks</label>
+                <label className="form-check-label" htmlFor="Visual" >{t("visualalarmclcks")}</label>
               </div>
               <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="Portable" value="Portable hearing" checked={selectedDisability.includes("Portable hearing")} onChange={handleCheckboxChange} />
-                <label className="form-check-label" htmlFor="Portable" >Portable hearing</label>
+                <label className="form-check-label" htmlFor="Portable" >{t("portablehearing")}</label>
               </div>
               <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="Video" value="Video remote interpreting (VRI)" checked={selectedDisability.includes("Video remote interpreting (VRI)")} onChange={handleCheckboxChange}/>
-                <label className="form-check-label" htmlFor="Video" >Video remote interpreting (VRI)</label>
+                <label className="form-check-label" htmlFor="Video" >{t("vri")}</label>
               </div>
               <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="Staff" value="Staff trained in American Sign Language" checked={selectedDisability.includes("Staff trained in American Sign Language")} onChange={handleCheckboxChange} />
-                <label className="form-check-label" htmlFor="Staff" >Staff trained in American Sign Language</label>
+                <label className="form-check-label" htmlFor="Staff" >{t("Stf_am")}</label>
               </div>
               <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="Portable1" value="Portable hearing amplifier" checked={selectedDisability.includes("Portable hearing amplifier")} onChange={handleCheckboxChange}/>
-                <label className="form-check-label" htmlFor="Portable1" >Portable hearing amplifier</label>
+                <label className="form-check-label" htmlFor="Portable1" >{t("Pha")}</label>
               </div>
               <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="TTY" value="TTY phones" checked={selectedDisability.includes("TTY phones")} onChange={handleCheckboxChange} />
-                <label className="form-check-label" htmlFor="TTY" >TTY phones</label>
+                <label className="form-check-label" htmlFor="TTY" >{t("ttyphones")}</label>
               </div>
               <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="Closed" value="Closed-captioned television" checked={selectedDisability.includes("Closed-captioned television")} onChange={handleCheckboxChange}/>
-                <label className="form-check-label" htmlFor="Closed" >Closed-captioned television</label>
+                <label className="form-check-label" htmlFor="Closed" >{t("cct")}</label>
               </div>
               <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="Elevators" value="Elevators or ramps" checked={selectedDisability.includes("Elevators or ramps")} onChange={handleCheckboxChange} />
-                <label className="form-check-label" htmlFor="Elevators" >Elevators or ramps</label>
+                <label className="form-check-label" htmlFor="Elevators" >{t("Elevators")}</label>
               </div>
               <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="Bed" value="Bed rails" checked={selectedDisability.includes("Bed rails")} onChange={handleCheckboxChange}/>
-                <label className="form-check-label" htmlFor="Bed" >Bed rails</label>
+                <label className="form-check-label" htmlFor="Bed" >{t("search")}</label>
               </div>
               <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="Shower" value="Shower chairs" checked={selectedDisability.includes("Shower chairs")} onChange={handleCheckboxChange} />
-                <label className="form-check-label" htmlFor="Shower" >Shower chairs</label>
+                <label className="form-check-label" htmlFor="Shower" >{t("shwChairs")}</label>
               </div>
               <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="Accessible" value="Accessible parking spots" checked={selectedDisability.includes("Accessible parking spots")} onChange={handleCheckboxChange}/>
-                <label className="form-check-label" htmlFor="Accessible" >Accessible parking spots</label>
+                <label className="form-check-label" htmlFor="Accessible" >{t("parking")}</label>
               </div>
               <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="Roll" value="Roll-in showers with grab bars" checked={selectedDisability.includes("Roll-in showers with grab bars")} onChange={handleCheckboxChange} />
-                <label className="form-check-label" htmlFor="Roll" >Roll-in showers with grab bars</label>
+                <label className="form-check-label" htmlFor="Roll" >{t("showerBars")}</label>
               </div>
               <div className="form-check">
                 <input type="checkbox" className="form-check-input" id="Wide" value="Wide doorways" checked={selectedDisability.includes("Wide doorways")} onChange={handleCheckboxChange} />
-                <label className="form-check-label" htmlFor="Wide" >Wide doorways</label>
+                <label className="form-check-label" htmlFor="Wide" >{t("w_doorways")}</label>
               </div>
             </div>
           </div>
