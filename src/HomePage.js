@@ -34,7 +34,6 @@ const Homepage = () =>{
       <div className='mx-3'>
         <div className="img">
        
-
           {/* <h1>Welcome to Handi Travel!!</h1> */}
           <h1>{t("greeting")}</h1>
           <p>{t("We are dedicated")}</p>
@@ -46,37 +45,19 @@ const Homepage = () =>{
         <Container>
           <Row className='ms-5'>
             <Col className="card-col">
-              <a href="/accommodation">
+              <a href="/tour">
                 <Card style={{ width: '20rem', height: '10rem' }}>
                   <Card.Img variant="top" style={{ height: '10rem' }} src={hotels} />
                   <Card.Body>
-                    <Card.Title>{t("Accommodation")}</Card.Title>
+                    <Card.Title>{t("Tour")}</Card.Title>
                   </Card.Body>
                 </Card>
               </a>
             </Col>
             
-            <Col className="card-col">
-              <a href="/commute">
-                <Card style={{ width: '20rem', height: '10rem' }}>
-                  <Card.Img variant="top" style={{ height: '10rem' }} src={commute} />
-                  <Card.Body>
-                    <Card.Title>{t("Commute")}</Card.Title>
-                  </Card.Body>
-                </Card>
-              </a>
-            </Col>
             
-            {/* <Col className="card-col">
-              <a href="/tour">
-                <Card style={{ width: '20rem', height: '10rem' }}>
-                  <Card.Img variant="top" style={{ height: '10rem' }} src="https://picsum.photos/200/300" />
-                  <Card.Body>
-                    <Card.Title>Tour</Card.Title>
-                  </Card.Body>
-                </Card>
-              </a>
-            </Col> */}
+            
+           
           </Row>
         </Container>
         

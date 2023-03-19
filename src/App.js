@@ -15,8 +15,10 @@ import logo from './assets/logo.jpeg';
 import logotext from './assets/logotext.png';
 import logoup from './assets/logoup.png';
 import { InputProvider } from './InputContext';
+import { CardPricesProvider } from './CardPricesContext';
 import { useTranslation, Translation } from "react-i18next";
 import i18n from 'i18next';
+import BookingPage from './BookingPage';
   
   const handleLanguageChange = (event) => {
     console.log("language: "+event.target.value)
@@ -31,6 +33,7 @@ function App() {
   return (
     <Router>
       <InputProvider>
+      <CardPricesProvider>
       <div className="App">
       <Navbar sticky="top" bg="primary" variant="dark" expand="lg" className="navbar">
           <Navbar.Brand as={Link} to="/" className='mx-3'>
@@ -48,10 +51,10 @@ function App() {
           />
           {/* <span className="ml-5 handi-travel">Handi Travel</span> */}
           </Navbar.Brand>
-          <select value={currentLanguage} onChange={handleLanguageChange}>
+          {/* <select value={currentLanguage} onChange={handleLanguageChange}>
       <option value="en">{t('English')}</option>
       <option value="fr">{t('Français')}</option>
-       </select>
+       </select> */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-3">
@@ -67,26 +70,26 @@ function App() {
               <Nav.Item>
                 <Nav.Link as={Link} to="/aboutus">About Us</Nav.Link>
               </Nav.Item> */}
-              <Nav.Item>
+              {/* <Nav.Item>
                 <Nav.Link as={Link} to="/accommodation">
                 {t("Accommodation")}
                 </Nav.Link>
-              </Nav.Item>
+              </Nav.Item> */}
               <Nav.Item>
-                <Nav.Link as={Link} to="/commute">
-                {t("Commute")}
+                <Nav.Link as={Link} to="/tour">
+                {t("Tour")}
                 </Nav.Link>
               </Nav.Item>
               {/* <Nav.Item>
                 <Nav.Link as={Link} to="/buses">
-                   Buses
+                   Book
                 </Nav.Link>
               </Nav.Item> */}
 
             </Nav>
             {/* <Nav className=''>
               <Nav.Item>
-                <Nav.Link as={Link} to="/login">Log In</Nav.Link>
+                <Nav.Link as={Link} to login">Log In</Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link as={Link} to="/signup">Sign Up</Nav.Link>
@@ -98,6 +101,15 @@ function App() {
               </Nav.Item>
             </Nav> */}
           </Navbar.Collapse>
+          <Nav.Item>
+              <Nav.Link >
+              <select value={currentLanguage} onChange={handleLanguageChange}>
+                    <option value="en">{t('English')}</option>
+                   <option value="fr">{t('Français')}</option>
+             </select> 
+                </Nav.Link>
+              
+             </Nav.Item>
         </Navbar>
         <Switch>
           <Route exact path="/">
@@ -109,17 +121,18 @@ function App() {
           <Route path="/accommodation">
             <HotelPage />
           </Route>
-          <Route path="/commute">
+          <Route path="/tour">
             <FlightPage/>
           </Route>
-          <Route path="/aboutus">
-            {/* <AboutUsPage /> */}
+          <Route path="/buses">
+          <BookingPage/>
           </Route>
           <Route path="/settings">
             {/* <SettingsPage /> */}
           </Route>
         </Switch>
       </div>
+      </CardPricesProvider>
       </InputProvider>
     </Router>
   );

@@ -6,9 +6,8 @@ import { BiDownArrow, BiUpArrow } from 'react-icons/bi';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { InputContext } from './InputContext';
-import { useTranslation, Translation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import i18n from 'i18next';
-
 
 
 
@@ -332,7 +331,7 @@ function HotelCard({ hotelName, accomodationType, bestPrice, price1, price2, pri
   </Card>
 
   );
-}
+};
 
 // function HotelList({ hotels }) {
 //   return (
