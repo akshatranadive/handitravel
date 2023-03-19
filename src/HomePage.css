@@ -21,8 +21,8 @@ body {
   }
   
   .nav-link:hover {
-    color: rgb(255, 53, 53);
-    /* color: rgb(235, 255, 53); */
+    color: yellow;
+    /* color: rgb(235, 255, 53);  */
   }
   
   /* .navbar-nav {
@@ -39,13 +39,13 @@ body {
   h1 {
     font-size: 2rem;
     font-weight: bold;
-    text-decoration-line: underline;
-    text-decoration-color: rgb(219, 219, 224);
-    color: #1384d5;
-    margin-bottom: 1rem;
-    border-color: aqua;
-    font-style: oblique;
+    text-shadow: -2px 0 rgba(255, 115, 0, 0.966), 0 2px rgba(255, 115, 0, 0.966), 2px 0 rgba(255, 115, 0, 0.966), 0 -2px rgba(255, 115, 0, 0.966);
+    text-decoration-color: blue;
+    color: blue;
+    margin-bottom: 1rem;  
+    border-color: rgba(255, 115, 0, 0.966);
     text-align: center;
+  
   }
   
   /* Style for paragraph */
@@ -68,22 +68,48 @@ body {
   h2 {
     font-size: 2rem;
     font-weight: bold;
-    color: #1384d5;
+    font-style: normal;
+    color: blue;
     margin-bottom: 1rem;
-    border-color: aqua;
-    font-style: oblique;
+    text-shadow: -2px 0 rgba(255, 115, 0, 0.966), 0 2px rgba(255, 115, 0, 0.966), 2px 0 rgba(255, 115, 0, 0.966), 0 -2px rgba(255, 115, 0, 0.966);
+    text-decoration-color: blue;
+    border-color: rgba(255, 115, 0, 0.966);
     text-align: center;
+    text-decoration-style:solid;
+
   }
   
   span {
     color: #0c0c0c;
   }
-  .img {
+  /* .img {
     background-image: url("");
     background-size: cover;
     background-position: center;
     filter: blur(5px);
     /* backdrop-filter: blur(5px); */
   
-  }
-  
+ /* } */
+
+ .bimage {
+  background-image: url('./assets/finalbg.png');
+  background-size:cover;
+  height: 140vh;
+} 
+
+h3 {
+  font-size: 2rem;
+  line-height: 1.5;
+  /* text-shadow: -2px 0 rgba(255, 115, 0, 0.966), 0 2px rgba(255, 115, 0, 0.966), 2px 0 rgba(255, 115, 0, 0.966), 0 -2px rgba(255, 115, 0, 0.966); */
+  /* text-decoration-color: blue; */
+  color: rgba(255, 115, 0, 0.966);
+  border-color: rgba(255, 115, 0, 0.966);
+  margin-bottom: 2rem;
+  text-align: center;
+  text-transform:uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ 
+

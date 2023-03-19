@@ -1,5 +1,5 @@
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import './App.css'; // Import custom styles for the App component
+import './HomePage.css'; // Import custom styles for the App component
 import hotels from './assets/hotels.jpg';
 import commute from './assets/commute.jpg';
 // import logoup from './assets/logoup.png';
@@ -19,6 +19,7 @@ const Homepage = () =>{
 
 
   return (
+    <div className='bimage'>
     <div className="container">
       {/* <div className="bg-image bg-image p-5 text-center shadow-1-strong rounded mb-5 text-white"  src={happy}>
         asffsdfwf
@@ -94,6 +95,7 @@ const Homepage = () =>{
   <h2>{t("price")}</h2>
   {/*<p>We are committed to providing our users with the best prices for their travel needs. Our website allows you to easily compare prices from different providers, so you can be sure you're getting the best deal. </p> */}
   <p>{t("commited")}</p>
+  </div>
   </div>
   </div>
   </div>)}

@@ -5,8 +5,8 @@ body {
 }
 
 .navbar {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  background-color: #469fff;
+  /* box-shadow: 0 2px 4px rgba(0,0,0,0.2); */
+  /* background-color: #469fff; */
   padding: 0 2rem;
 }
 
@@ -14,26 +14,25 @@ body {
   margin-left: auto;
 }
 
-.nav-link {
+/* .nav-link {
   color: rgb(255, 255, 255);
-  /*color: rgb(7, 161, 48);*/
   font-weight: 500;
   margin-left: 10px;
   margin-right: 10px;
   text-transform: uppercase;
   cursor: pointer;
-}
+} */
 
-.nav-link:hover {
+/* .nav-link:hover {
   color: rgb(255, 53, 53);
   color: rgb(235, 255, 53);
-}
+} */
 
 
-.handi-travel {
+/* .handi-travel {
   font-family: 'Alegreya', serif;
   font-size: 2rem;
-}
+} */
 
 
 
