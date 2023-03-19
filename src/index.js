@@ -9,7 +9,7 @@ import './i18n.js';
 import fr from "./translations/fr";
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+let root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
     <App />
