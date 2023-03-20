@@ -333,7 +333,7 @@ function FlightPage() {
       };
       
       // setHotelPrice(0);
-      axios.get('http://localhost:2023/hotel', { params: searchParams })
+      axios.get('https://handitravel-server-jif2xulpl-akshatranadive.vercel.app/hotel', { params: searchParams })
       .then(response => {
         let res = response.data;
         //change
@@ -358,7 +358,7 @@ function FlightPage() {
         budget: budget/2,
       };
       // setFlightPrice(0);
-      axios.get('http://localhost:2023/flights', { params: searchParams })
+      axios.get('https://handitravel-server-jif2xulpl-akshatranadive.vercel.app/flights', { params: searchParams })
       .then(response => {
         let res = response.data;
         //change
@@ -382,7 +382,7 @@ function FlightPage() {
       };
 
       // setBusesPrice(0);
-      axios.get('http://localhost:2023/buses', { params: searchParams })
+      axios.get('https://handitravel-server-jif2xulpl-akshatranadive.vercel.app/buses', { params: searchParams })
       .then(response => {
           let res = response.data;
           //change
