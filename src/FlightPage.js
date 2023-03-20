@@ -1,3 +1,4 @@
+import './FlightPage.css';
 import axios from 'axios';
 import React, { useState, useContext, useEffect } from 'react';
 import { Tabs, Tab, Card, Row, Col, DropdownButton, Form } from 'react-bootstrap';
@@ -47,8 +48,7 @@ function FlightPage() {
   };
 
   let dataChange = () =>{
-    let hotel = hotels.find(hotel => hotel.accomodations === selectedHotel);
-    console.log("csa"+selectedHotel);
+    let hotel = hotels.find(hotel => hotel.country === selectedCountry && hotel.accomodations === selectedHotel);
     setHotelPrice(hotel);
   };
 

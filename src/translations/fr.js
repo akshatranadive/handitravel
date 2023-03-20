@@ -50,7 +50,7 @@ export default {
           "Departure":"Départ",
           "Arrival":"Arrivée",
           "Departdate":"Date de départ",
-          "returndate":"date de retour",
+          "returndate":"Date de retour",
           "triptype":"type de voyage",
           "roundtrip":"aller-retour",
           "oneway":"Sens Unique",
@@ -97,8 +97,8 @@ export default {
     "HotelPrice":"Prix de l'hôtel",
     "GrandTotal":"Total",
     "dhospital":"Distance de l'hôpital",
-    "Accessiblebusinesscenter":"Accessible business center",
-    "Serviceanimalswelcome":"Service animals welcome",
+    "Accessiblebusinesscenter":"Centre d'affaires accessible",
+    "Serviceanimalswelcome":"Animaux d'assistance acceptés",
 
     // ...
   };

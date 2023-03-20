@@ -36,12 +36,12 @@ body {
   }  */
   /* Style for heading */
   h1 {
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: bold;
     text-decoration-line: underline;
     /* text-decoration-color: rgb(219, 219, 224); */
-    color: #1384d5;
-    border-color: aqua;
+    /* color: #1384d5;
+    border-color: aqua; */
     font-style: oblique;
   }
   
