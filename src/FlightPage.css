@@ -3,3 +3,18 @@
 body {
     font-family: 'Poppins', sans-serif;
 }   
+
+.tt{
+    font-weight: bold;
+    background-color: rgba(255, 255, 0, 0.562);
+}
+
+/* .tt{
+    font-weight: bold;
+    background-color: rgb(233, 211, 17);
+} */
+
+.bann{
+    font-weight: bold;
+    background-color: rgba(255, 255, 0, 0.562);
+}

@@ -617,8 +617,8 @@ function TotalCard() {
 
   return (
     <Card className='my-2' border={isSelected ? "primary" : ""} onClick={onSelect} style={{ cursor: 'pointer' }}>
-      <Card.Header>{t("Total Price")}</Card.Header>
-      <Card.Body>
+      <Card.Header className='tt'>{t("Total Price")}</Card.Header>
+      <Card.Body className='bb'>
       <div>
           <p>{t("HotelPrice")}: €{hotelPrice}</p>
           <p>{t("FlightPrice")}: €{flightPrice}</p>
@@ -660,7 +660,7 @@ function BannedMedicinesCard({country}) {
   debugger
   return (
     <Card>
-      <Card.Header>{t("BannedMedicinesin")} {country}</Card.Header>
+      <Card.Header className='bann'>{t("BannedMedicinesin")} {country}</Card.Header>
       <Card.Body>
         <ListGroup>
         {medArray.map((medicine, index) => (
@@ -947,7 +947,7 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
                 </Col>
                 <Col></Col>
               <Col></Col>
-              <Col></Col>
+              
               
                 <Col>
                   <h5>€{cost}/{t("person")}</h5>

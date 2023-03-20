@@ -15,7 +15,7 @@ body {
 }
 
 .nav-link {
-  color: rgb(255, 255, 255);
+  color: rgb(14, 13, 13);
   /*color: rgb(7, 161, 48);*/
   font-weight: 500;
   margin-left: 10px;
@@ -26,7 +26,6 @@ body {
 
 .nav-link:hover {
   color: rgb(255, 53, 53);
-  color: rgb(235, 255, 53);
 }
 
 

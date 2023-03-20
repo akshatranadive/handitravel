@@ -1,5 +1,5 @@
 export default {
-          "greeting": "Bienvenue chez Handi Travel!!!",
+          "greeting": "Bienvenue chez Handi Travel",
           "English": "Anglais",
           "Français": "Français",
           "We are dedicated": "Nous nous engageons à fournir les meilleures options de voyage pour les personnes handicapées.",
@@ -7,7 +7,7 @@ export default {
           "Commute": "Navette",
           "our features": "nos fonctionnalités",
           "easy": "Interface facile à utiliser",
-          "search": "Recherchez et comparez les prix des hôtels, des vols et des bus",
+          "srch": "Recherchez et comparez les prix des hôtels, des vols et des bus",
           "options": "Options personnalisables pour les besoins d'accessibilité",
           "booking": "Réservation pour handicapés",
           "understand": "Nous comprenons les défis uniques auxquels les personnes handicapées sont confrontées lorsqu'elles voyagent, et nous nous efforçons de rendre le processus aussi fluide et sans stress que possible. Notre site Web offre une variété de fonctionnalités spécifiquement adaptées aux besoins des personnes handicapées, notamment :",

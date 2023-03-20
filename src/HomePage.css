@@ -35,21 +35,25 @@ body {
     border-color: #0c0c0c;
   }  */
   /* Style for heading */
-  h1 {
-    font-size: 1rem;
+  .greethead{
+    font-size: 4rem;
     font-weight: bold;
-    text-decoration-line: underline;
-    /* text-decoration-color: rgb(219, 219, 224); */
-    /* color: #1384d5;
-    border-color: aqua; */
-    font-style: oblique;
+    text-shadow: -2px 0 rgba(255, 115, 0, 0.966), 0 2px rgba(255, 115, 0, 0.966), 2px 0 rgba(255, 115, 0, 0.966), 0 -2px rgba(255, 115, 0, 0.966);
+    text-decoration-color: blue;
+    color: blue;
+    margin-bottom: 1rem;
+    border-color: rgba(255, 115, 0, 0.966);
+    text-align: center;
   }
   
   /* Style for paragraph */
-  p {
-    font-size: 1rem;
+  .dedii {
+    font-size: 1.2rem;
     line-height: 1.5;
     color: #0c0c0c;
+    margin-bottom: 3rem;
+    text-align: center;
+    font-weight: bold;
   }
   
   li {
@@ -58,14 +62,19 @@ body {
     color: #0c0c0c;
   }
   
-  /* h2 {
-    font-size: 2rem;
+  .ourf {
+    font-size: 3rem;
     font-weight: bold;
-    color: #1384d5;
+    font-style: normal;
+    color: blue;
     margin-bottom: 1rem;
-    border-color: aqua;
-    font-style: oblique;
-  } */
+    text-shadow: -2px 0 rgba(255, 115, 0, 0.966), 0 2px rgba(255, 115, 0, 0.966), 2px 0 rgba(255, 115, 0, 0.966), 0 -2px rgba(255, 115, 0, 0.966);
+    text-decoration-color: blue;
+    border-color: rgba(255, 115, 0, 0.966);
+    text-align: center;
+    text-decoration-style:solid;
+
+  }
   
   span {
     color: #0c0c0c;
@@ -74,7 +83,37 @@ body {
   .bimage {
     background-image: url('./assets/finalbg.png');
     background-size:cover;
-    height: 135vh;
+    height: 147vh;
   } 
+  
+  .card-col{
+    display: flex;
+    justify-content: center;
+    flex-direction:row;
+  }
+
+  h3 {
+    font-size: 2rem;
+    font-weight:bolder;
+    line-height: 1.5;
+    /* text-shadow: -2px 0 rgba(255, 115, 0, 0.966), 0 2px rgba(255, 115, 0, 0.966), 2px 0 rgba(255, 115, 0, 0.966), 0 -2px rgba(255, 115, 0, 0.966); */
+    /* text-decoration-color: blue; */
+    color: rgba(255, 115, 0, 0.966);;
+    border-color: rgba(255, 115, 0, 0.966);
+    margin-bottom: 2rem;
+    text-align: center;
+    text-transform:uppercase;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .threef {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #0c0c0c;
+    margin-bottom: 3rem;
+    text-align: center;
+    font-weight: bold;
+  }
   
   

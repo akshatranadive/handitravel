@@ -1,5 +1,5 @@
 export default {
-    "greeting": "Welcome to Handi Travel!!!",
+    "greeting": "Welcome to Handi Travel",
     "English": "English",
     "Français": "Français",
     "We are dedicated": "We are dedicated to providing the best travel options for people with disabilities.",
@@ -7,7 +7,7 @@ export default {
     "Commute": "Commute",
     "our features": "Our Features",
     "easy": "Easy-to-use interface",
-    "search": "Search and compare prices for hotels, flights and buses",
+    "srch": "Search and compare prices for hotels, flights and buses",
     "options": "Customizable options for accessibility needs",
     "booking": "Booking for Disabled",
     "understand": "We understand the unique challenges that people with disabilities face when traveling, and we strive to make the process as smooth and stress-free as possible. Our website offers a variety of features specifically tailored to the needs of people with disabilities, including:",

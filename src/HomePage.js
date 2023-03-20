@@ -20,7 +20,7 @@ const Homepage = () =>{
 
   return (
     <div className='bimage'>
-    <div className="container">
+    <div className="container1" >
       {/* <div className="bg-image bg-image p-5 text-center shadow-1-strong rounded mb-5 text-white"  src={happy}>
         asffsdfwf
         </div> */}
@@ -37,8 +37,8 @@ const Homepage = () =>{
         <div className="img">
        <br></br>
           {/* <h1>Welcome to Handi Travel!!</h1> */}
-          <h1>{t("greeting")}</h1>
-          <p>{t("We are dedicated")}</p>
+          <h1 className='greethead'>{t("greeting")}</h1>
+          <p className='dedii'>{t("We are dedicated")}</p>
           {/* <p>We are dedicated to providing the best travel options for people with disabilities.</p> */}
         </div>
         
@@ -48,10 +48,10 @@ const Homepage = () =>{
           <Row className='ms-5'>
             <Col className="card-col">
               <a href="/tour">
-                <Card style={{ width: '20rem', height: '10rem' }}>
-                  <Card.Img variant="top" style={{ height: '10rem' }} src={hotels} />
+              <Card style={{ width: '100%', height: '20rem' }}>
+                  <Card.Img variant="top" style={{ height: '20rem' }} src={hotels} />
                   <Card.Body>
-                  <Card.Title>{t("Tour")}</Card.Title>
+                  <Card.Title><h3 className='text-center'>{t("Tour")}</h3></Card.Title>
                   </Card.Body>
                 </Card>
               </a>
@@ -71,8 +71,8 @@ const Homepage = () =>{
         <br></br>
         <div className='my-5'>
         {/* <h2>Our Features</h2> */}
-        <h2>{t("our features")}</h2>
-          <ul>
+        <h2 className='ourf'>{t("our features")}</h2>
+          <ul className='threef'>
             {/* <li>Easy-to-use interface</li> */}
             <p>{t("easy")}</p>
             {/*<li>Search and compare prices for hotels, flights, and buses</li> */}
