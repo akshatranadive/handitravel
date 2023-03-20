@@ -10,7 +10,7 @@ body {
   }
   
   .nav-link {
-    color: rgb(255, 255, 255);
+    /* color: rgb(255, 255, 255); */
     /*color: rgb(7, 161, 48);*/
     font-weight: 500;
     margin-left: 10px;
@@ -19,11 +19,10 @@ body {
     /* outline-style: groove; */
     cursor: pointer;
   }
-  
+/*   
   .nav-link:hover {
     color: rgb(255, 53, 53);
-    /* color: rgb(235, 255, 53); */
-  }
+  } */
   
   /* .navbar-nav {
     margin-right: 0;
@@ -40,50 +39,42 @@ body {
     font-size: 2rem;
     font-weight: bold;
     text-decoration-line: underline;
-    text-decoration-color: rgb(219, 219, 224);
+    /* text-decoration-color: rgb(219, 219, 224); */
     color: #1384d5;
-    margin-bottom: 1rem;
     border-color: aqua;
     font-style: oblique;
-    text-align: center;
   }
   
   /* Style for paragraph */
   p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     line-height: 1.5;
     color: #0c0c0c;
-    margin-bottom: 2rem;
-    text-align: center;
   }
   
   li {
-    font-size: 1.2rem;
+    font-size: 1rem;
     line-height: 1.5;
     color: #0c0c0c;
-    margin-bottom: 2rem;
-    text-align: center;
   }
   
-  h2 {
+  /* h2 {
     font-size: 2rem;
     font-weight: bold;
     color: #1384d5;
     margin-bottom: 1rem;
     border-color: aqua;
     font-style: oblique;
-    text-align: center;
-  }
+  } */
   
   span {
     color: #0c0c0c;
   }
-  .img {
-    background-image: url("");
-    background-size: cover;
-    background-position: center;
-    filter: blur(5px);
-    /* backdrop-filter: blur(5px); */
+
+  .bimage {
+    background-image: url('./assets/finalbg.png');
+    background-size:cover;
+    height: 135vh;
+  } 
   
-  }
   
