@@ -333,7 +333,7 @@ function FlightPage() {
       };
       
       // setHotelPrice(0);
-      axios.get('https://handitravel-server-jif2xulpl-akshatranadive.vercel.app/hotel', { params: searchParams })
+      axios.get('https://handitravel-server-git-testserverbr-akshatranadive.vercel.app/hotel', { params: searchParams })
       .then(response => {
         let res = response.data;
         //change
@@ -353,12 +353,13 @@ function FlightPage() {
         // departDate,
         // returnDate,
         // numPeople,
+        disability:selectedDisability,
         type: key,
         returnTrip: tripType == 'round-trip' ? true : false,
         budget: budget/2,
       };
       // setFlightPrice(0);
-      axios.get('https://handitravel-server-jif2xulpl-akshatranadive.vercel.app/flights', { params: searchParams })
+      axios.get('https://handitravel-server-git-testserverbr-akshatranadive.vercel.app/flights', { params: searchParams })
       .then(response => {
         let res = response.data;
         //change
@@ -382,7 +383,7 @@ function FlightPage() {
       };
 
       // setBusesPrice(0);
-      axios.get('https://handitravel-server-jif2xulpl-akshatranadive.vercel.app/buses', { params: searchParams })
+      axios.get('https://handitravel-server-git-testserverbr-akshatranadive.vercel.app/buses', { params: searchParams })
       .then(response => {
           let res = response.data;
           //change
@@ -480,7 +481,7 @@ function FlightPage() {
           price2={hotel.price2}
           price3={hotel.price3}
           country={hotel.country}
-          location={arrival}
+          location={hotel.location}
           days={Math.ceil(((new Date(returnDate)).getTime()-new Date(departDate).getTime())/(1000*60*60*24))}
           people={numPeople}
           ammenities={hotel.amenities}
@@ -525,7 +526,7 @@ function FlightPage() {
         departure={flight.departure}
         departureTime={flight.departureTime1}
         departureReturnTime={flight.departureTime2}
-        arrival={flight.arrival}
+        arrival={flight.parisarrival}
         arrivalTime={flight.arrivalTime1}
         arrivalReturnTime={flight.arrivalTime2}
         duration={flight.duration}
@@ -657,7 +658,6 @@ function BannedMedicinesCard({country}) {
     }, [country]);
   
   
-  debugger
   return (
     <Card>
       <Card.Header className='bann'>{t("BannedMedicinesin")} {country}</Card.Header>
