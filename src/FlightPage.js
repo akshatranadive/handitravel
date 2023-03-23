@@ -775,7 +775,7 @@ return (
           </ul>
     <Card.Text className='fw-bold' >{t("destination")}: <span className='fw-light'>{location}, {country}</span></Card.Text>
     <Card.Text className='fw-bold' >{t("hospital")}: <span className='fw-light'>{hospital}</span></Card.Text>
-    <Card.Text className='fw-bold' >{t("dhospital")}: <span className='fw-light'>{distance}</span></Card.Text>
+    <Card.Text className='fw-bold' >{t("dhospital")}: <span className='fw-light'>{distance}km</span></Card.Text>
     <Card.Text className='fw-bold'>{t("grndtotal")}: <span  onChange={(e) => { handleDataChange(); return e.target.value; }} className='fw-light'><span className='fw-bold'>{bestPrice}</span>(Best Price)*<span className='fw-bold'>{days}</span>(Number of nights)*<span className='fw-bold'>{people}</span>(Number of people) = </span><span className='fw-bold'>€{grandtotal}</span></Card.Text>
     <Button variant="primary" onClick={handleExpansion}>
       {isExpanded ? <BiUpArrow/> : <BiDownArrow/>}
