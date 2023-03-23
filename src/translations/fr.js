@@ -61,7 +61,7 @@ export default {
           "grndtotal":"Total",
           "destination":"Destination",
           "compareprices":"Comparer les prix",
-          "bestPrice_night":"Meilleur prix/nuit:",
+          "bestPrice_night":"Meilleur prix/nuit",
           "accomodationtype":"Type d'hébergement",
           "person":"Personne",
           "departuretime":"Heure de départ",
