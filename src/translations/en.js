@@ -98,10 +98,11 @@ export default {
     "dhospital":"Distance from Hospital",
     "Accessiblebusinesscenter":"Accessible business center",
     "Serviceanimalswelcome":"Service animals welcome",
-
-
-    
-
-
+    "AC":"Air conditioning",
+    "Bassistance":"Bookable assistance",
+    "onboardentertainment":"On-board entertainment",
+    "onboardrefreshments":"On-board refreshments",
+    "llpeepholes":"Lowered light switches and peepholes",
+    "totalprice":"Total Price"
 // ...
 };

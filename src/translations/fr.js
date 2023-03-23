@@ -99,6 +99,13 @@ export default {
     "dhospital":"Distance de l'hôpital",
     "Accessiblebusinesscenter":"Centre d'affaires accessible",
     "Serviceanimalswelcome":"Animaux d'assistance acceptés",
+    "AC":"Climatisation",
+"Bassistance":"Assistance réservable",
+"onboardentertainment":"Divertissement à bord",
+"onboardrefreshments":"Rafraîchissements à bord",
+"llpeepholes":"Interrupteurs et judas abaissés",
+"totalprice":"Prix ​​total",
+
 
     // ...
   };
