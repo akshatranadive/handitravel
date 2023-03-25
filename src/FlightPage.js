@@ -11,6 +11,7 @@ import { useTranslation, Translation } from "react-i18next";
 import i18n from 'i18next';
 import { Dropdown } from 'react-bootstrap';
 import { CardPricesContext } from './CardPricesContext';
+var data = require("./assets/ReturnFlightsData.json");
 
 function FlightPage() {
   const { t } = useTranslation();
@@ -40,8 +41,31 @@ function FlightPage() {
   let [selectedBusesDisability, setSelectedBusesDisability] = useState([]);
   const [hotels, setHotels] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
-  const [showPopup, setShowPopup] = useState(false);
+  const [showArrivalSearch, setshowArrivalSearch] = useState(false);
+  const [showDepartureSearch, setshowDepartureSearch] = useState(false);
+  
 
+  
+  const onArrivalClick = (event) => {
+    setshowArrivalSearch(true);
+    // setDeparture(event.target.value);
+  };
+  const onDepartureClick = (event) => {
+    setshowDepartureSearch(true);
+    // setDeparture(event.target.value);
+  };
+
+  const onChange = (event) => {
+    setDeparture(event.target.value);
+  };
+
+
+  const onSearchDeparture = (searchTerm) => {
+    setDeparture(searchTerm);
+  };
+  const onSearchArrival = (searchTerm) => {
+    setArrival(searchTerm);
+  };
 
   let handleHotelSelection = (hotelName) => {
     setSelectedHotel(hotelName);
@@ -265,7 +289,7 @@ function FlightPage() {
         <label className="form-check-label" htmlFor="prioritybaggagehandling" >{t("prioritybaggagehandling")}</label>
       </div>
       <div className="form-check">
-        <input type="checkbox" className="form-check-input" id="Accessiblecheckincounters" value="" checked={selectedFlightsDisability.includes("Accessible checking Counters")} onChange={handleFlightCheckboxChange}/>
+        <input type="checkbox" className="form-check-input" id="Accessiblecheckincounters" value="Accessible checking Counters" checked={selectedFlightsDisability.includes("Accessible checking Counters")} onChange={handleFlightCheckboxChange}/>
         <label className="form-check-label" htmlFor="Accessiblecheckincounters" >{t("Accessiblecheckincounters")}</label>
       </div>
       <div className="form-check">
@@ -438,16 +462,44 @@ function FlightPage() {
           </div>
               <div className="form-group col-md-2">
                 <label htmlFor="departure" className='fw-bolder text-primary'>{t("Departure")}</label>
-                  <input type="text" id="departure" name="departure" className="form-control" placeholder={t("egNY")} value={departure} onChange={(e) => setDeparture(e.target.value)} />
+                  <input type="text" id="departure" name="departure" className="form-control" placeholder={t("egNY")} value={departure} onClick={onDepartureClick} onChange={onChange} autocomplete="off" />
+                <div className="search-inner">
+                <div className="dropdown">
+                    {showDepartureSearch && [...new Set(data
+                      .filter((item) => {
+                        let searchTerm = departure.toLowerCase();
+                        let location = item.departure.toLowerCase();
+                        return location.includes(searchTerm) && location !== searchTerm;
+                      })
+                      .map((item) => item.departure)
+                    )]
+                    .map((departureLocation) => (
+                      <div onClick={()=>onSearchDeparture(departureLocation)} key={departureLocation} className="dropdown-row">{departureLocation}</div>
+                    ))}
+                </div>
+
+
+                </div>
               </div>
-              {/* <div className="form-group col-md-1 mt-4">
-                    <button type="button" className="btn btn-outline-primary" onClick={handleExchangeClick}>
-                      <FaExchangeAlt />
-                    </button>
-                  </div> */}
               <div className="form-group col-md-2">
                 <label htmlFor="arrival" className='fw-bolder text-primary'>{t("Arrival")}</label>
-                  <input type="text" id="arrival" name="arrival" className="form-control" placeholder={t("egLA")} value={arrival} onChange={(e) => setArrival(e.target.value)} />
+                  <input type="text" id="arrival" name="arrival" className="form-control" placeholder={t("egLA")} value={arrival} onClick={onArrivalClick} onChange={(e) => setArrival(e.target.value)} autocomplete="off" />
+                  <div className="search-inner">
+                <div className="dropdown">
+                    {showArrivalSearch && [...new Set(data
+                      .filter((item) => {
+                        let searchTerm = arrival.toLowerCase();
+                        let location = item.arrival.toLowerCase();
+                        let depart = item.departure.toLowerCase();
+                        return location.includes(searchTerm) && location !== searchTerm  && depart === departure.toLowerCase();
+                      })
+                      .map((item) => item.arrival)
+                    )]
+                    .map((arrivalLocation) => (
+                      <div onClick={()=>onSearchArrival(arrivalLocation)} key={arrivalLocation} className="dropdown-row">{arrivalLocation}</div>
+                    ))}
+                </div>
+                </div>
                 </div>
               <div className="form-group col-md-2">
                 <label htmlFor="depart-date" className='fw-bolder text-primary'>{t("Departdate")}</label>

@@ -29,7 +29,7 @@ export default {
           "checkin":"enregistrement",
           "checkout":"vérifier",
           "numofp":"Nombre de personnes",
-          "budget/night":"Budget",
+          "budget/night":"Budget voyage",
           "search":"Recherche",
           "amenities":"Agréments",
           "visualalarmclcks":"Réveils visuels",

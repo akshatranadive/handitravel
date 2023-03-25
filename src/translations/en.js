@@ -28,7 +28,7 @@ export default {
     "checkin":"Check in",
     "checkout":"Check Out",
     "numofp":"Number of people",
-    "budget/night":"Budget",
+    "budget/night":"Trip budget",
     "search":"Search",
     "amenities":"Amenities",
     "visualalarmclcks":"Visual alarm clocks",
