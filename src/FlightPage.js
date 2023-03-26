@@ -382,19 +382,20 @@ function FlightPage() {
       .then(response => {
         let res = response.data;
         //change
-        if(res.length === 0){
-          setnodataText("No data found for required destination, budget and amenities.");
-          setnodataTextNotify("We have notified server for your requirements!");
-        }
-        else{
-          setnodataText("");
-          setnodataTextNotify("");
-        }
+        
         let sorted = [];
         let filteredHotels = [];
         filteredHotels = res.filter(hotel => hotel.type == selectedValue && hotel.country == selectedCountry);
         sorted = [...filteredHotels].sort((b ,a) => b.bestPrice - a.bestPrice);
 
+        if(sorted.length === 0){
+          setnodataText("No data found for required destination, budget and amenities.");
+          setnodataTextNotify("We have notified server for your requirements! Try with different parameters.");
+        }
+        else{
+          setnodataText("");
+          setnodataTextNotify("");
+        }
         sorted.forEach(hotel => {
           let amenitiesSet = new Set(hotel.amenities.split(', '));
           // let newAmenities = ["amenity1", "amenity2", "amenity3"]; // replace with your own amenities data
@@ -434,7 +435,7 @@ function FlightPage() {
         res = response.data;
         if(res.length === 0){
           setnodataText("No data found for required destination, budget and amenities.");
-          setnodataTextNotify("We have notified server for your requirements!");
+          setnodataTextNotify("We have notified server for your requirements! Try with different parameters.");
         }
         else{
           setnodataText("");
@@ -478,7 +479,7 @@ function FlightPage() {
           let res = response.data;
           if(res.length === 0){
             setnodataText("No data found for required destination, budget and amenities.");
-            setnodataTextNotify("We have notified server for your requirements!");
+            setnodataTextNotify("We have notified server for your requirements! Try with different parameters.");
           }
           else{
             setnodataText("");
