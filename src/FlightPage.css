@@ -26,7 +26,7 @@ body {
     flex-direction: column;
   }
   
-  .dropdown {
+  .dropdown1 {
     background-color: #f7faff;
     display: flex;
     flex-direction: column;
@@ -37,12 +37,12 @@ body {
     overflow-y: auto;
   }
   
-  .dropdown:empty {
+  .dropdown1:empty {
     border: none;
     box-shadow: none;
   }
   
-  .dropdown-row {
+  .dropdown1-row {
     cursor: pointer;
     text-align: start;
     margin: 2px 0;
@@ -52,20 +52,20 @@ body {
     background-color: #e6f4ff;
   }
   
-  .dropdown-row:hover {
+  .dropdown1-row:hover {
     background-color: #6dbcf1;
   }
   
-  .dropdown::-webkit-scrollbar {
+  .dropdown1::-webkit-scrollbar {
     width: 8px;
   }
   
-  .dropdown::-webkit-scrollbar-thumb {
+  .dropdown1::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
   }
   
-  .dropdown::-webkit-scrollbar-track {
+  .dropdown1::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0.05);
     border-radius: 10px;
   }

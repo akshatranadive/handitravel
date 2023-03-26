@@ -44,6 +44,7 @@ function FlightPage() {
   const [showArrivalSearch, setshowArrivalSearch] = useState(false);
   const [showDepartureSearch, setshowDepartureSearch] = useState(false);
   
+  const [arrivalSetting, setarrivalSetting] = useState("");
 
   
   const onArrivalClick = (event) => {
@@ -380,8 +381,23 @@ function FlightPage() {
       .then(response => {
         let res = response.data;
         //change
-        let filteredHotels = res.filter(hotel =>hotel.type == selectedValue && hotel.country == selectedCountry);
-        let sorted = [...filteredHotels].sort((b ,a) => b.bestPrice - a.bestPrice);
+        let sorted = [];
+        let filteredHotels = [];
+        filteredHotels = res.filter(hotel => hotel.type == selectedValue && hotel.country == selectedCountry);
+        sorted = [...filteredHotels].sort((b ,a) => b.bestPrice - a.bestPrice);
+
+        sorted.forEach(hotel => {
+          let amenitiesSet = new Set(hotel.amenities.split(', '));
+          // let newAmenities = ["amenity1", "amenity2", "amenity3"]; // replace with your own amenities data
+          selectedDisability.forEach(amenity => {
+            if (!amenitiesSet.has(amenity)) {
+              amenitiesSet.add(amenity);
+            }
+          });
+          hotel.location = arrival;
+          hotel.amenities = Array.from(amenitiesSet).join(', ');
+        });
+    
         setHotels(sorted);
       })
       .catch(error => {
@@ -405,10 +421,22 @@ function FlightPage() {
       // setFlightPrice(0);
       axios.get('https://handitravel-server-git-testserverbr-akshatranadive.vercel.app/flights', { params: searchParams })
       .then(response => {
-        let res = response.data;
+        let res = [];
+        res = response.data;
         //change
-        let sorted = [...res].sort((b ,a) => b.cost - a.cost);
+        let sorted = [];
+        sorted = [...res].sort((b ,a) => b.cost - a.cost);
         
+        sorted.forEach(flight => {
+          let amenitiesSet = new Set(flight.ammenities.split(','));
+          // let newAmenities = ["amenity1", "amenity2", "amenity3"]; // replace with your own amenities data
+          selectedFlightsDisability.forEach(amenity => {
+            if (!amenitiesSet.has(amenity)) {
+              amenitiesSet.add(amenity);
+            }
+          });
+          flight.ammenities = Array.from(amenitiesSet).join(',');
+        });
         setFlight(sorted);
       })
       .catch(error => {
@@ -434,6 +462,16 @@ function FlightPage() {
           //change
           let sorted = [...res].sort((b ,a) => b.cost - a.cost);
     
+          sorted.forEach(bus => {
+            let amenitiesSet = new Set(bus.amenities.split(','));
+            // let newAmenities = ["amenity1", "amenity2", "amenity3"]; // replace with your own amenities data
+            selectedBusesDisability.forEach(amenity => {
+              if (!amenitiesSet.has(amenity)) {
+                amenitiesSet.add(amenity);
+              }
+            });
+            bus.amenities = Array.from(amenitiesSet).join(',');
+          });
           setBuses(sorted);
         })
         .catch(error => {
@@ -455,16 +493,16 @@ function FlightPage() {
             <Dropdown.Item eventKey="UAE">UAE</Dropdown.Item>
             <Dropdown.Item eventKey="Canada">Canada</Dropdown.Item>
             <Dropdown.Item eventKey="France">France</Dropdown.Item>
-            <Dropdown.Item eventKey="USA">USA</Dropdown.Item>
+            {/* <Dropdown.Item eventKey="USA">USA</Dropdown.Item>
             <Dropdown.Item eventKey="UK">UK</Dropdown.Item>
-            <Dropdown.Item eventKey="Australia">Australia</Dropdown.Item>
+            <Dropdown.Item eventKey="Australia">Australia</Dropdown.Item> */}
             </DropdownButton>
           </div>
-              <div className="form-group col-md-2">
+          <div className="form-group col-md-2">
                 <label htmlFor="departure" className='fw-bolder text-primary'>{t("Departure")}</label>
-                  <input type="text" id="departure" name="departure" className="form-control" placeholder={t("egNY")} value={departure} onClick={onDepartureClick} onChange={onChange} autocomplete="off" />
+                  <input type="text" id="departure" name="departure" className="form-control" placeholder={t("egNY")} value={departure} onClick={onDepartureClick} onChange={onChange} autoComplete="off" />
                 <div className="search-inner">
-                <div className="dropdown">
+                <div className="dropdown1">
                     {showDepartureSearch && [...new Set(data
                       .filter((item) => {
                         let searchTerm = departure.toLowerCase();
@@ -474,7 +512,7 @@ function FlightPage() {
                       .map((item) => item.departure)
                     )]
                     .map((departureLocation) => (
-                      <div onClick={()=>onSearchDeparture(departureLocation)} key={departureLocation} className="dropdown-row">{departureLocation}</div>
+                      <div onClick={()=>onSearchDeparture(departureLocation)} key={departureLocation} className="dropdown1-row">{departureLocation}</div>
                     ))}
                 </div>
 
@@ -483,9 +521,9 @@ function FlightPage() {
               </div>
               <div className="form-group col-md-2">
                 <label htmlFor="arrival" className='fw-bolder text-primary'>{t("Arrival")}</label>
-                  <input type="text" id="arrival" name="arrival" className="form-control" placeholder={t("egLA")} value={arrival} onClick={onArrivalClick} onChange={(e) => setArrival(e.target.value)} autocomplete="off" />
+                  <input type="text" id="arrival" name="arrival" className="form-control" placeholder={t("egLA")} value={arrival} onClick={onArrivalClick} onChange={(e) => setArrival(e.target.value)} autoComplete="off" />
                   <div className="search-inner">
-                <div className="dropdown">
+                <div className="dropdown1">
                     {showArrivalSearch && [...new Set(data
                       .filter((item) => {
                         let searchTerm = arrival.toLowerCase();
@@ -496,7 +534,7 @@ function FlightPage() {
                       .map((item) => item.arrival)
                     )]
                     .map((arrivalLocation) => (
-                      <div onClick={()=>onSearchArrival(arrivalLocation)} key={arrivalLocation} className="dropdown-row">{arrivalLocation}</div>
+                      <div onClick={()=>onSearchArrival(arrivalLocation)} key={arrivalLocation} className="dropdown1-row">{arrivalLocation}</div>
                     ))}
                 </div>
                 </div>
@@ -546,16 +584,17 @@ function FlightPage() {
         <div className='row my-2'>
         {(hotels.length ) ? hotels.map(hotel => (
         <HotelCard
-          key={hotel.accomodations}
+          key={hotel._id}
           hotelName={hotel.accomodations}
-          accomodationType={selectedValue}
-          // accomodationType={hotel.type}
+          // accomodationType={selectedValue}
+          accomodationType={hotel.type}
           bestPrice={hotel.bestPrice}
           price1={hotel.price1}
           price2={hotel.price2}
           price3={hotel.price3}
           country={hotel.country}
           location={hotel.location}
+          //location={arrival}
           days={Math.ceil(((new Date(returnDate)).getTime()-new Date(departDate).getTime())/(1000*60*60*24))}
           people={numPeople}
           ammenities={hotel.amenities}
@@ -825,7 +864,7 @@ return (
               <li key={index}>{amenity}</li>
             ))}
           </ul>
-    <Card.Text className='fw-bold' >{t("destination")}: <span className='fw-light'>{location}, {country}</span></Card.Text>
+    <Card.Text className='fw-bold' >{t("destination")}: <span className='fw-light'>{location}</span></Card.Text>
     <Card.Text className='fw-bold' >{t("hospital")}: <span className='fw-light'>{hospital}</span></Card.Text>
     <Card.Text className='fw-bold' >{t("dhospital")}: <span className='fw-light'>{distance}km</span></Card.Text>
     <Card.Text className='fw-bold'>{t("grndtotal")}: <span  onChange={(e) => { handleDataChange(); return e.target.value; }} className='fw-light'><span className='fw-bold'>{bestPrice}</span>(Best Price)*<span className='fw-bold'>{days}</span>(Number of nights)*<span className='fw-bold'>{people}</span>(Number of people) = </span><span className='fw-bold'>€{grandtotal}</span></Card.Text>
