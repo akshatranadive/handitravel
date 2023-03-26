@@ -44,7 +44,8 @@ function FlightPage() {
   const [showArrivalSearch, setshowArrivalSearch] = useState(false);
   const [showDepartureSearch, setshowDepartureSearch] = useState(false);
   
-  const [arrivalSetting, setarrivalSetting] = useState("");
+  const [nodataText, setnodataText] = useState("");
+  const [nodataTextNotify, setnodataTextNotify] = useState("");
 
   
   const onArrivalClick = (event) => {
@@ -250,7 +251,11 @@ function FlightPage() {
 
     ammenitiesContent = (  <div>
       <div className="form-check">
-        <input type="checkbox" className="form-check-input" id="wheelchairassistance" value="Wheelchair Assistance" checked={selectedFlightsDisability.includes("Wheelchair Assistance")} onChange={handleFlightCheckboxChange}/>
+        <input type="checkbox" className="form-check-input" id="specialmeals" value="Special meals" checked={selectedFlightsDisability.includes("Special meals")} onChange={handleFlightCheckboxChange}/>
+        <label className="form-check-label" htmlFor="specialmeals" >{t("specialmeals")}</label>
+      </div>
+      <div className="form-check">
+        <input type="checkbox" className="form-check-input" id="wheelchairassistance" value="Wheelchair assistance" checked={selectedFlightsDisability.includes("Wheelchair assistance")} onChange={handleFlightCheckboxChange}/>
         <label className="form-check-label" htmlFor="wheelchairassistance" >{t("wheelchairassistance")}</label>
       </div>
       <div className="form-check">
@@ -274,10 +279,6 @@ function FlightPage() {
         <label className="form-check-label" htmlFor="signlanguageinterpretation" >{t("signlanguageinterpretation")}</label>
       </div>
       <div className="form-check">
-        <input type="checkbox" className="form-check-input" id="specialmeals" value="Special meals" checked={selectedFlightsDisability.includes("Special meals")} onChange={handleFlightCheckboxChange}/>
-        <label className="form-check-label" htmlFor="specialmeals" >{t("specialmeals")}</label>
-      </div>
-      <div className="form-check">
         <input type="checkbox" className="form-check-input" id="medicalassistance" value="In-flight medical assistance" checked={selectedFlightsDisability.includes("In-flight medical assistance")} onChange={handleFlightCheckboxChange} />
         <label className="form-check-label" htmlFor="medicalassistance" >{t("medicalassistance")}</label>
       </div>
@@ -290,7 +291,7 @@ function FlightPage() {
         <label className="form-check-label" htmlFor="prioritybaggagehandling" >{t("prioritybaggagehandling")}</label>
       </div>
       <div className="form-check">
-        <input type="checkbox" className="form-check-input" id="Accessiblecheckincounters" value="Accessible checking Counters" checked={selectedFlightsDisability.includes("Accessible checking Counters")} onChange={handleFlightCheckboxChange}/>
+        <input type="checkbox" className="form-check-input" id="Accessiblecheckincounters" value="Accessible check-in counters" checked={selectedFlightsDisability.includes("Accessible checking Counters")} onChange={handleFlightCheckboxChange}/>
         <label className="form-check-label" htmlFor="Accessiblecheckincounters" >{t("Accessiblecheckincounters")}</label>
       </div>
       <div className="form-check">
@@ -381,6 +382,14 @@ function FlightPage() {
       .then(response => {
         let res = response.data;
         //change
+        if(res.length === 0){
+          setnodataText("No data found for required destination, budget and amenities.");
+          setnodataTextNotify("We have notified server for your requirements!");
+        }
+        else{
+          setnodataText("");
+          setnodataTextNotify("");
+        }
         let sorted = [];
         let filteredHotels = [];
         filteredHotels = res.filter(hotel => hotel.type == selectedValue && hotel.country == selectedCountry);
@@ -423,6 +432,14 @@ function FlightPage() {
       .then(response => {
         let res = [];
         res = response.data;
+        if(res.length === 0){
+          setnodataText("No data found for required destination, budget and amenities.");
+          setnodataTextNotify("We have notified server for your requirements!");
+        }
+        else{
+          setnodataText("");
+          setnodataTextNotify("");
+        }
         //change
         let sorted = [];
         sorted = [...res].sort((b ,a) => b.cost - a.cost);
@@ -459,6 +476,14 @@ function FlightPage() {
       axios.get('https://handitravel-server-git-testserverbr-akshatranadive.vercel.app/buses', { params: searchParams })
       .then(response => {
           let res = response.data;
+          if(res.length === 0){
+            setnodataText("No data found for required destination, budget and amenities.");
+            setnodataTextNotify("We have notified server for your requirements!");
+          }
+          else{
+            setnodataText("");
+            setnodataTextNotify("");
+          }
           //change
           let sorted = [...res].sort((b ,a) => b.cost - a.cost);
     
@@ -582,103 +607,108 @@ function FlightPage() {
       >
         <Tab eventKey="hotels" title={t("hotels")}>
         <div className='row my-2'>
-        {(hotels.length ) ? hotels.map(hotel => (
+  {hotels.length > 0 ? (
+    <div className='ms-5'>
+      {hotels.map(hotel => (
         <HotelCard
-          key={hotel._id}
-          hotelName={hotel.accomodations}
-          // accomodationType={selectedValue}
-          accomodationType={hotel.type}
-          bestPrice={hotel.bestPrice}
-          price1={hotel.price1}
-          price2={hotel.price2}
-          price3={hotel.price3}
-          country={hotel.country}
-          location={hotel.location}
-          //location={arrival}
-          days={Math.ceil(((new Date(returnDate)).getTime()-new Date(departDate).getTime())/(1000*60*60*24))}
-          people={numPeople}
-          ammenities={hotel.amenities}
-          isSelected={selectedHotel === hotel.name}
-          onSelect={() => handleHotelSelection(hotel.name)}
-          hospital={hotel.hospital}
-          distance={hotel.distance}
+        key={hotel._id}
+        hotelName={hotel.accomodations}
+        // accomodationType={selectedValue}
+        accomodationType={hotel.type}
+        bestPrice={hotel.bestPrice}
+        price1={hotel.price1}
+        price2={hotel.price2}
+        price3={hotel.price3}
+        country={hotel.country}
+        location={hotel.location}
+        //location={arrival}
+        days={Math.ceil(((new Date(returnDate)).getTime()-new Date(departDate).getTime())/(1000*60*60*24))}
+        people={numPeople}
+        ammenities={hotel.amenities}
+        isSelected={selectedHotel === hotel.name}
+        onSelect={() => handleHotelSelection(hotel.name)}
+        hospital={hotel.hospital}
+        distance={hotel.distance}
         />
-       )) : 
-      //  <p className="col-md-10">No records found!</p>
-      null
-        }
-          </div>
+      ))}
+    </div>
+  ) : (
+    <p>{nodataText} <br/>{nodataTextNotify}</p>
+  )}
+</div>
+
           </Tab>
         <Tab eventKey="flight" title={t("flight")}>
           
-          <div className='row my-2'>
-            
-          {(flights.length && (tripType == 'one-way')) ? flights.map(flight => (
-            
-            <div className='ms-5'>
+        <div className='row my-2'>
+  {flights.length > 0 ? (
+    <div className=''>
+      {tripType === 'one-way' ? (
+        flights.map(flight => (
           <FlightCard 
-          airline={flight.airlines}
-          departure={flight.departure}
-          departureTime={flight.departureTime}
-          //departureAirport={flight.departureAirport}
-          arrival={flight.arrival}
-          arrivalTime={flight.arrivalTime}
-          // arrivalAirport={flight.arrivalAirport}
-          duration={flight.duration}
-          disabledAmenities={flight.ammenities}
-          cost={flight.cost}
-          returnFlight={tripType}
-          people={numPeople}
-        />
+            airline={flight.airlines}
+            departure={flight.departure}
+            departureTime={flight.departureTime}
+            arrival={flight.arrival}
+            arrivalTime={flight.arrivalTime}
+            duration={flight.duration}
+            disabledAmenities={flight.ammenities}
+            cost={flight.cost}
+            returnFlight={tripType}
+            people={numPeople}
+          />
+        ))
+      ) : (
+        flights.map(flight => (
+          <FlightCard 
+            airline={flight.airlines}
+            departure={flight.departure}
+            departureTime={flight.departureTime1}
+            departureReturnTime={flight.departureTime2}
+            arrival={flight.arrival}
+            arrivalTime={flight.arrivalTime1}
+            arrivalReturnTime={flight.arrivalTime2}
+            duration={flight.duration}
+            disabledAmenities={flight.ammenities}
+            cost={flight.cost} 
+            returnFlight={tripType}
+            people={numPeople}
+          />
+        ))
+      )}
+    </div>
+  ) : (
+    <p>{nodataText} <br/>{nodataTextNotify}</p>
+  )}
+</div>
 
-        </div>
-      )) : 
-      flights.map(flight => (
-      <FlightCard 
-        airline={flight.airlines}
-        departure={flight.departure}
-        departureTime={flight.departureTime1}
-        departureReturnTime={flight.departureTime2}
-        arrival={flight.arrival}
-        arrivalTime={flight.arrivalTime1}
-        arrivalReturnTime={flight.arrivalTime2}
-        duration={flight.duration}
-        disabledAmenities={flight.ammenities}
-        cost={flight.cost} 
-        returnFlight={tripType}
-        people={numPeople}
-      />))}
-        
-             </div>
              
         </Tab>
         <Tab eventKey="bus" title={t("buses")}>
          
-          <div className='row my-2'>
-            
-          {(buses.length) ? buses.map(flight => (
-            
-            <div className='ms-5'>
-          <BusCard 
-          airline={flight.airlines}
-          departureBus={flight.from}
-          departureBusTime={flight.departureBusTime}
-          //departureBusAirport={flight.departureBusAirport}
-          arrivalBus={flight.to}
-          arrivalBusTime={flight.arrivalBusTime}
-          // arrivalBusAirport={flight.arrivalBusAirport}
-          duration={flight.duration}
-          disabledAmenities={flight.amenities}
-          cost={flight.cost}
+        <div className='row my-2'>
+  {buses.length > 0 ? (
+    <div className=''>
+      {buses.map(bus => (
+        <BusCard 
+          airline={bus.airlines}
+          departureBus={bus.from}
+          departureBusTime={bus.departureBusTime}
+          arrivalBus={bus.to}
+          arrivalBusTime={bus.arrivalBusTime}
+          duration={bus.duration}
+          disabledAmenities={bus.amenities}
+          cost={bus.cost}
           returnFlight={tripType}
           people={numPeople}
         />
+      ))}
+    </div>
+  ) : (
+    <p>{nodataText} <br/>{nodataTextNotify}</p>
+  )}
+</div>
 
-        </div>
-      )) : 
-      null}
-        
-             </div>
              
         </Tab>
 {/*         
