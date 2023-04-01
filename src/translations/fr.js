@@ -107,6 +107,7 @@ export default {
 "totalprice":"Prix ​​total",
 "removeall":"Enlever tout",
 "selectall":"Tout sélectionner",
+"trvls":"voyageurs",
 
 
 

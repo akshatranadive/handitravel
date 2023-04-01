@@ -1,5 +1,7 @@
-import { useHistory, Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './FlightPage.css';
+import { useHistory, Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 import axios from 'axios';
 import React, { useState, useContext, useEffect } from 'react';
 import { Tabs, Tab, Card, Row, Col, DropdownButton, Form } from 'react-bootstrap';
@@ -18,8 +20,6 @@ import { FaHotel ,FaFlagUsa } from "react-icons/fa";
 import { ImPriceTag } from "react-icons/im";
 import { AiFillMedicineBox } from "react-icons/ai";
 import { MdTravelExplore } from "react-icons/md";
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
 import BookingPage from './BookingPage';
 var data = require("./assets/ReturnFlightsData.json");
 
@@ -260,7 +260,14 @@ function FlightPage() {
     );
     ammenitiesContent = (
       <div>
-          <div style={{ display: 'flex'}} className='my-2'>
+        <div>
+        <Card>
+      <Card.Header className='bann'> <AiFillMedicineBox  style={{ marginRight: '5px' }} /> {t("amenities")} </Card.Header>
+      <Card.Body>
+      <ListGroup>
+       
+      <div className="checkbox-container1">
+  <div style={{ display: 'flex'}} className='my-2'>
     <button type="button" className="btn btn-outline-success btn-sm" onClick={handleSelectAllHotels}>
       {t("selectall")}
     </button>
@@ -268,62 +275,71 @@ function FlightPage() {
       {t("removeall")}
     </button>
   </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="Visual" value="Visual alarm clocks" checked={selectedDisability.includes("Visual alarm clocks")} onChange={handleCheckboxChange}/>
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Visual" >{t("visualalarmclcks")}</label>
-      </div>     
-       
-       <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="llpeepholes" value="Lowered light switches and peepholes" checked={selectedDisability.includes("Lowered light switches and peepholes")} onChange={handleCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="llpeepholes" >{t("llpeepholes")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="Video" value="Video remote interpreting (VRI)" checked={selectedDisability.includes("Video remote interpreting (VRI)")} onChange={handleCheckboxChange}/>
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Video" >{t("vri")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="Staff" value="Staff trained in American Sign Language" checked={selectedDisability.includes("Staff trained in American Sign Language")} onChange={handleCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Staff" >{t("Stf_am")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="Portable1" value="Portable hearing amplifier" checked={selectedDisability.includes("Portable hearing amplifier")} onChange={handleCheckboxChange}/>
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Portable1" >{t("Pha")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="TTY" value="TTY phones" checked={selectedDisability.includes("TTY phones")} onChange={handleCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="TTY" >{t("ttyphones")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="Closed" value="Closed-captioned television" checked={selectedDisability.includes("Closed-captioned television")} onChange={handleCheckboxChange}/>
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Closed" >{t("cct")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="Elevators" value="Elevators or ramps" checked={selectedDisability.includes("Elevators or ramps")} onChange={handleCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Elevators" >{t("Elevators")}</label>
-      </div>
-      {/* <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="Bed" value="Bed rails" checked={selectedDisability.includes("Bed rails")} onChange={handleCheckboxChange}/>
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Bed" >{t("srch")}</label>
-      </div> */}
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="Shower" value="Shower chairs" checked={selectedDisability.includes("Shower chairs")} onChange={handleCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Shower" >{t("shwChairs")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="Accessible" value="Accessible parking spots" checked={selectedDisability.includes("Accessible parking spots")} onChange={handleCheckboxChange}/>
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Accessible" >{t("parking")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="Roll" value="Roll-in showers with grab bars" checked={selectedDisability.includes("Roll-in showers with grab bars")} onChange={handleCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Roll" >{t("showerBars")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="Wide" value="Wide doorways" checked={selectedDisability.includes("Wide doorways")} onChange={handleCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Wide" >{t("w_doorways")}</label>
-      </div>
-  </div>
-    
-    
+
+<div class="checkbox">
+<div className="form-check">
+
+<input type="checkbox" className="form-check-input" id="Visual" value="Visual alarm clocks" checked={selectedDisability.includes("Visual alarm clocks")} onChange={handleCheckboxChange}/>
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Visual" >{t("visualalarmclcks")}</label>
+</div>     
+
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="llpeepholes" value="Lowered light switches and peepholes" checked={selectedDisability.includes("Lowered light switches and peepholes")} onChange={handleCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="llpeepholes" >{t("llpeepholes")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="Video" value="Video remote interpreting (VRI)" checked={selectedDisability.includes("Video remote interpreting (VRI)")} onChange={handleCheckboxChange}/>
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Video" >{t("vri")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="Staff" value="Staff trained in American Sign Language" checked={selectedDisability.includes("Staff trained in American Sign Language")} onChange={handleCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Staff" >{t("Stf_am")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="Portable1" value="Portable hearing amplifier" checked={selectedDisability.includes("Portable hearing amplifier")} onChange={handleCheckboxChange}/>
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Portable1" >{t("Pha")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="TTY" value="TTY phones" checked={selectedDisability.includes("TTY phones")} onChange={handleCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="TTY" >{t("ttyphones")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="Closed" value="Closed-captioned television" checked={selectedDisability.includes("Closed-captioned television")} onChange={handleCheckboxChange}/>
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Closed" >{t("cct")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="Elevators" value="Elevators or ramps" checked={selectedDisability.includes("Elevators or ramps")} onChange={handleCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Elevators" >{t("Elevators")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="Bed" value="Bed rails" checked={selectedDisability.includes("Bed rails")} onChange={handleCheckboxChange}/>
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Bed" >{t("Bed")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="Shower" value="Shower chairs" checked={selectedDisability.includes("Shower chairs")} onChange={handleCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Shower" >{t("shwChairs")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="Accessible" value="Accessible parking spots" checked={selectedDisability.includes("Accessible parking spots")} onChange={handleCheckboxChange}/>
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Accessible" >{t("parking")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="Roll" value="Roll-in showers with grab bars" checked={selectedDisability.includes("Roll-in showers with grab bars")} onChange={handleCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Roll" >{t("showerBars")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="Wide" value="Wide doorways" checked={selectedDisability.includes("Wide doorways")} onChange={handleCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Wide" >{t("w_doorways")}</label>
+</div>
+</div>
+</div>
+
+</ListGroup>
+</Card.Body>
+</Card>
+</div>
+</div>
+
     );
   } else if (key === 'flight') {
     content = (
@@ -360,8 +376,14 @@ function FlightPage() {
     );
   
     ammenitiesContent = (  
-    <div>
-        <div style={{ display: 'flex'}} className='my-2'>
+      <div>
+<div>
+<Card>
+<Card.Header className='bann'> <AiFillMedicineBox  style={{ marginRight: '5px' }} />  {t("amenities")}</Card.Header>
+<Card.Body>
+<ListGroup>
+<div className="checkbox-container1">
+  <div style={{ display: 'flex'}} className='my-2'>
     <button type="button" className="btn btn-outline-success btn-sm" onClick={handleSelectAllFlights}>
       {t("selectall")}
     </button>
@@ -369,63 +391,74 @@ function FlightPage() {
       {t("removeall")}
     </button>
   </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="specialmeals" value="Special meals" checked={selectedFlightsDisability.includes("Special meals")} onChange={handleFlightCheckboxChange}/>
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="specialmeals" >{t("specialmeals")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="wheelchairassistance" value="Wheelchair assistance" checked={selectedFlightsDisability.includes("Wheelchair assistance")} onChange={handleFlightCheckboxChange}/>
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="wheelchairassistance" >{t("wheelchairassistance")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="Priorityboarding" value="Priority boarding" checked={selectedFlightsDisability.includes("Priority boarding")} onChange={handleFlightCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Priorityboarding" >{t("Priorityboarding")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="extralegroom" value="Extra legroom" checked={selectedFlightsDisability.includes("Extra legroom")} onChange={handleFlightCheckboxChange}/>
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="extralegroom" >{t("extralegroom")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="accessiblelavatories" value="Accessible lavatories" checked={selectedFlightsDisability.includes("Accessible lavatories")} onChange={handleFlightCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="accessiblelavatories" >{t("accessiblelavatories")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="braillesafetycards" value="Braille safety cards" checked={selectedFlightsDisability.includes("Braille safety cards")} onChange={handleFlightCheckboxChange}/>
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="braillesafetycards" >{t("braillesafetycards")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="signlanguageinterpretation" value="Sign language interpretation" checked={selectedFlightsDisability.includes("Sign language interpretation")} onChange={handleFlightCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="signlanguageinterpretation" >{t("signlanguageinterpretation")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="medicalassistance" value="In-flight medical assistance" checked={selectedFlightsDisability.includes("In-flight medical assistance")} onChange={handleFlightCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="medicalassistance" >{t("medicalassistance")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="visualauditoryaids" value="Visual and auditory aids" checked={selectedFlightsDisability.includes("Visual and auditory aids")} onChange={handleFlightCheckboxChange}/>
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="visualauditoryaids" >{t("visualauditoryaids")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="prioritybaggagehandling" value="Priority baggage handling" checked={selectedFlightsDisability.includes("Priority baggage handling")} onChange={handleFlightCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="prioritybaggagehandling" >{t("prioritybaggagehandling")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="Accessiblecheckincounters" value="Accessible check-in counters" checked={selectedFlightsDisability.includes("Accessible check-in counters")} onChange={handleFlightCheckboxChange}/>
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Accessiblecheckincounters" >{t("Accessiblecheckincounters")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="seatarrangement" value="Special seating arrangements" checked={selectedFlightsDisability.includes("Special seating arrangements")} onChange={handleFlightCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="seatarrangement" >{t("seatarrangement")}</label>
-      </div>
-     
-  </div>);
+<div className="form-check"> 
+<input type="checkbox" className="form-check-input" id="specialmeals" value="Special meals" checked={selectedFlightsDisability.includes("Special meals")} onChange={handleFlightCheckboxChange}/>
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="specialmeals" >{t("specialmeals")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="wheelchairassistance" value="Wheelchair assistance" checked={selectedFlightsDisability.includes("Wheelchair assistance")} onChange={handleFlightCheckboxChange}/>
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="wheelchairassistance" >{t("wheelchairassistance")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="Priorityboarding" value="Priority boarding" checked={selectedFlightsDisability.includes("Priority boarding")} onChange={handleFlightCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Priorityboarding" >{t("Priorityboarding")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="extralegroom" value="Extra legroom" checked={selectedFlightsDisability.includes("Extra legroom")} onChange={handleFlightCheckboxChange}/>
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="extralegroom" >{t("extralegroom")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="accessiblelavatories" value="Accessible lavatories" checked={selectedFlightsDisability.includes("Accessible lavatories")} onChange={handleFlightCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="accessiblelavatories" >{t("accessiblelavatories")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="braillesafetycards" value="Braille safety cards" checked={selectedFlightsDisability.includes("Braille safety cards")} onChange={handleFlightCheckboxChange}/>
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="braillesafetycards" >{t("braillesafetycards")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="signlanguageinterpretation" value="Sign language interpretation" checked={selectedFlightsDisability.includes("Sign language interpretation")} onChange={handleFlightCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="signlanguageinterpretation" >{t("signlanguageinterpretation")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="medicalassistance" value="In-flight medical assistance" checked={selectedFlightsDisability.includes("In-flight medical assistance")} onChange={handleFlightCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="medicalassistance" >{t("medicalassistance")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="visualauditoryaids" value="Visual and auditory aids" checked={selectedFlightsDisability.includes("Visual and auditory aids")} onChange={handleFlightCheckboxChange}/>
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="visualauditoryaids" >{t("visualauditoryaids")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="prioritybaggagehandling" value="Priority baggage handling" checked={selectedFlightsDisability.includes("Priority baggage handling")} onChange={handleFlightCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="prioritybaggagehandling" >{t("prioritybaggagehandling")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="Accessiblecheckincounters" value="Accessible check-in counters" checked={selectedFlightsDisability.includes("Accessible check-in counters")} onChange={handleFlightCheckboxChange}/>
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Accessiblecheckincounters" >{t("Accessiblecheckincounters")}</label>
+</div>
+<div className="form-check">
+<input type="checkbox" className="form-check-input" id="seatarrangement" value="Special seating arrangements" checked={selectedFlightsDisability.includes("Special seating arrangements")} onChange={handleFlightCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="seatarrangement" >{t("seatarrangement")}</label>
+</div>
+</div>
+</ListGroup>
+</Card.Body>
+</Card>
+</div>
+</div>);
+
   } else if(key === 'bus') {
     content = (
       <div></div>
     );
     ammenitiesContent = (
       <div>
-          <div style={{ display: 'flex' }} className='my-2'>
+        <div>
+  <Card>
+<Card.Header className='bann'> <AiFillMedicineBox  style={{ marginRight: '5px' }} />  {t("amenities")}</Card.Header>
+<Card.Body>
+<ListGroup>
+<div className="checkbox-container1">
+  <div style={{ display: 'flex'}} className='my-2'>
     <button type="button" className="btn btn-outline-success btn-sm" onClick={handleSelectAllBuses}>
       {t("selectall")}
     </button>
@@ -433,40 +466,56 @@ function FlightPage() {
       {t("removeall")}
     </button>
   </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-    <input type="checkbox" className="form-check-input" id="wheelchairlift" value="Wheelchair lift" checked={selectedBusesDisability.includes("Wheelchair lift")} onChange={handleBusesCheckboxChange}/>
-    <label className="form-check-label" htmlFor="wheelchairlift">{t("wheelchairlift")}</label>
-  </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="accessibleseating" value="Accessible seating" checked={selectedBusesDisability.includes("Accessible seating")} onChange={handleBusesCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="accessibleseating" >{t("accessibleseating")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="audioannouncements" value="Audio announcements" checked={selectedBusesDisability.includes("Audio announcements")} onChange={handleBusesCheckboxChange}/>
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="audioannouncements">{t("audioannouncements")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="onboardrestroom" value="On-board restroom" checked={selectedBusesDisability.includes("On-board restroom")} onChange={handleBusesCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="onboardrestroom" >{t("onboardrestroom")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="AC" value="Air conditioning" checked={selectedBusesDisability.includes("Air conditioning")} onChange={handleBusesCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="AC" >{t("AC")}</label>
-      </div>
-     <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="Bassistance" value="Bookable assistance" checked={selectedBusesDisability.includes("Bookable assistance")} onChange={handleBusesCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Bassistance" >{t("Bassistance")}</label>
-      </div>
-      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="onboardentertainment" value="On-board entertainment" checked={selectedBusesDisability.includes("On-board entertainment")} onChange={handleBusesCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="onboardentertainment" >{t("onboardentertainment")}</label>
-      </div>
-     <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
-        <input type="checkbox" className="form-check-input" id="onboardrefreshments" value="On-board refreshments" checked={selectedBusesDisability.includes("On-board refreshments")} onChange={handleBusesCheckboxChange} />
-        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="onboardrefreshments" >{t("onboardrefreshments")}</label>
-      </div>
+<div className="form-check">
 
-  </div>
+<input type="checkbox" className="form-check-input" id="wheelchairlift" value="Wheelchair lift" checked={selectedBusesDisability.includes("Wheelchair lift")} onChange={handleBusesCheckboxChange}/>
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="wheelchairlift" >{t("wheelchairlift")}</label>
+</div>
+<div className="form-check">
+
+<input type="checkbox" className="form-check-input" id="accessibleseating" value="Accessible seating" checked={selectedBusesDisability.includes("Accessible seating")} onChange={handleBusesCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="accessibleseating" >{t("accessibleseating")}</label>
+</div>
+<div className="form-check">
+
+<input type="checkbox" className="form-check-input" id="audioannouncements" value="Audio announcements" checked={selectedBusesDisability.includes("Audio announcements")} onChange={handleBusesCheckboxChange}/>
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="audioannouncements" >{t("audioannouncements")}</label>
+</div>
+<div className="form-check">
+
+<input type="checkbox" className="form-check-input" id="onboardrestroom" value="On-board restroom" checked={selectedBusesDisability.includes("On-board restroom")} onChange={handleBusesCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="onboardrestroom" >{t("onboardrestroom")}</label>
+</div>
+<div className="form-check">
+
+<input type="checkbox" className="form-check-input" id="AC" value="Air conditioning" checked={selectedBusesDisability.includes("Air conditioning")} onChange={handleBusesCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="AC" >{t("AC")}</label>
+</div>
+<div className="form-check">
+
+<input type="checkbox" className="form-check-input" id="Bassistance" value="Bookable assistance" checked={selectedBusesDisability.includes("Bookable assistance")} onChange={handleBusesCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Bassistance" >{t("Bassistance")}</label>
+</div>
+<div className="form-check">
+
+<input type="checkbox" className="form-check-input" id="onboardentertainment" value="On-board entertainment" checked={selectedBusesDisability.includes("On-board entertainment")} onChange={handleBusesCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="onboardentertainment" >{t("onboardentertainment")}</label>
+</div>
+<div className="form-check">
+
+<input type="checkbox" className="form-check-input" id="onboardrefreshments" value="On-board refreshments" checked={selectedBusesDisability.includes("On-board refreshments")} onChange={handleBusesCheckboxChange} />
+<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="onboardrefreshments" >{t("onboardrefreshments")}</label>
+</div>
+</div>
+
+
+</ListGroup>
+
+</Card.Body>
+</Card>
+</div>
+</div>
+
     );
   }
 
@@ -728,10 +777,16 @@ function FlightPage() {
               
               {t("budget/night")}
              
+        {/* <Popup trigger={<a className='fw-bolder text-primary' data-toggle="tooltip" data-placement="right"  title="">     <BsFillQuestionCircleFill/></a>} position="bottom center"> */}
         <Popup trigger={<a className='fw-bolder text-primary' data-toggle="tooltip" data-placement="right"  title="">     <BsFillQuestionCircleFill/></a>} position="bottom center">
         
-          <div className="mb-2 col-md-2">
-          <form className='popup'>
+          <div className="mb-2">
+            <p>The trip budget indicates budget of whole trip which includes Hotels, Flights and Buses</p>
+            <p>We have taken budget for individual components as follows:</p>
+            <p>Hotels: 30%</p>
+            <p>Flights: 50%</p>
+            <p>Buses: 20%</p>
+          {/* <form className='popup'>
           <label for="hotels">Hotels:</label>
           <input className="hotls" type="text" id="hotels" name="hotels" required></input>
           <label for="flights">Flights:</label>
@@ -740,10 +795,10 @@ function FlightPage() {
           <input className="buss" type="text" id="bus" name="bus" required></input>
 
  
-</form>
+</form> */}
 
           </div>
-          <button type="submit">Submit</button>
+          {/* <button type="submit">Submit</button> */}
         </Popup>
      
     </div>
@@ -800,6 +855,7 @@ function FlightPage() {
         days={Math.ceil(((new Date(returnDate)).getTime()-new Date(departDate).getTime())/(1000*60*60*24))}
         people={numPeople}
         ammenities={hotel.amenities}
+        places={hotel.touristPlaces}
         isSelected={selectedHotel === hotel.name}
         onSelect={() => handleHotelSelection(hotel.name)}
         hospital={hotel.hospital}
@@ -920,7 +976,7 @@ function TotalCard() {
   // const [hotelPrice, setHotelPrice] = useState('');
   // const [flightPrice, setFlightPrice] = useState('');
   // const [busPrice, setBusPrice] = useState('');
-  let {hotelPrice=0, flightPrice=0, busesPrice=0, totalPrice = 0, setTotalPrice, setBusesPrice, setFlightPrice, setHotelPrice, isSelected, onSelect} = useContext(CardPricesContext);
+  let {hotelPrice, flightPrice, busesPrice, totalPrice, selectedHotel, transportName,departureB,arrivalB,time1,time2,time3, transportType, settransportType, settime3,time4, settime4, settime2, settime1, setArrivalB, setDepartureB, settransportName, setSelectedHotel, setTotalPrice, setBusesPrice, setFlightPrice, setHotelPrice, isSelected, onSelect} = useContext(CardPricesContext);
   let [borderColor, setBorderColor] = useState('light');
   totalPrice = Number(hotelPrice) + Number(flightPrice) + Number(busesPrice);
   let showPrice = totalPrice > 0;
@@ -998,7 +1054,7 @@ function BannedMedicinesCard({country}) {
   );
 }
 
-function HotelCard({ hotelName, accomodationType, bestPrice, price1, price2, price3, country, location, ammenities, amenitiesF, days, people, hospital, distance, language }) {
+function HotelCard({ hotelName, accomodationType, bestPrice, price1, price2, price3, country, location, ammenities, amenitiesF, days, people, hospital, distance, language, places }) {
   const [isExpanded, setIsExpanded] = useState(false);
   let [borderColor, setBorderColor] = useState('light');
   const [isSelected, setIsSelected] = useState(false);
@@ -1095,6 +1151,13 @@ return (
 </ul>
 
     <Card.Text className='fw-bold' >{t("destination")}: <span className='fw-light'>{location}</span></Card.Text>
+
+    <Card.Text className='fw-bold'>{t("touristplaces")}:</Card.Text>
+    <ul>
+            {places.split(',').map((amenity, index) => (
+              <li key={index}>{amenity}</li>
+            ))}
+          </ul>
     <Card.Text className='fw-bold' >{t("hospital")}: <span className='fw-light'>{hospital}</span></Card.Text>
     <Card.Text className='fw-bold' >{t("dhospital")}: <span className='fw-light'>{distance}km</span></Card.Text>
 
@@ -1134,13 +1197,27 @@ return (
 );
 };
 
-let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, cost, departureTime, arrivalTime, departureReturnTime, arrivalReturnTime, returnFlight, people, disabledAmenitiesF, language }) => {
-  let {hotelPrice=0, flightPrice=0, busesPrice=0, totalPrice = 0, setTotalPrice, setBusesPrice, setFlightPrice, setHotelPrice, isSelected, onSelect} = useContext(CardPricesContext);
+let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, cost, departureTime, arrivalTime, departureReturnTime, arrivalReturnTime, returnFlight, people, amenitiesF, language }) => {
+  let {hotelPrice, flightPrice, busesPrice, totalPrice, selectedHotel, transportName,departureB,arrivalB,time1,time2,time3, settime3,time4, transportType, settransportType, settime4, settime2, settime1, setArrivalB, setDepartureB, settransportName, setSelectedHotel, setTotalPrice, setBusesPrice, setFlightPrice, setHotelPrice, isSelected, onSelect} = useContext(CardPricesContext);
   const { t } = useTranslation();
   const currentLanguage = i18n.language;
 
   const handleBookNowSelection = () => {
     // history.push('/booking');
+    setDepartureB(departure);
+    setArrivalB(arrival);
+    settime1(departureTime);
+    settime2(arrivalTime);
+    if(returnFlight == 'one-way'){
+      settime3('');
+      settime4('');
+    }
+    else{
+      settime3(departureReturnTime);
+      settime4(arrivalReturnTime);
+    }
+    settransportName(airline);
+    settransportType('Flight');
   };
 
   const handleSelection = (e) => {
@@ -1199,7 +1276,7 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
                         <li key={index}>{amenity}</li>
                       ))
                     : language === 'fr'
-                    ? disabledAmenitiesF.split(',').map((amenity, index) => (
+                    ? amenitiesF.split(',').map((amenity, index) => (
                         <li key={index}>{amenity}</li>
                       ))
                     : null}
@@ -1207,11 +1284,16 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
                 </Col>
             </Row>
             <Row>
+                <Col className='fw-bolder'>
+                {t("grndtotal")}: €{people * cost}
+                </Col>
+              </Row>
+            <Row>
                 <Col>
                 {/* {t("booknow")}: <a href={"https://www.booking.com/"+{airline}} target="_blank" rel="noreferrer">
                 {"https://www.booking.com/"+airline}
               </a> */}
-              <Link to="/book">
+              <Link to="/book" onClick={handleBookNowSelection}>
 
                 <Button variant="primary" onClick={handleSelection}>
               {t("booknow")}
@@ -1219,11 +1301,7 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
             </Link>
                 </Col>
               </Row>
-            <Row>
-                <Col className='fw-bolder'>
-                {t("grndtotal")}: €{people * cost}
-                </Col>
-              </Row>
+            
           </Card.Body>
         </Card>
         </div>
@@ -1278,7 +1356,7 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
                         <li key={index}>{amenity}</li>
                       ))
                     : language === 'fr'
-                    ? disabledAmenitiesF.split(',').map((amenity, index) => (
+                    ? amenitiesF.split(',').map((amenity, index) => (
                         <li key={index}>{amenity}</li>
                       ))
                     : null}
@@ -1343,7 +1421,7 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
                         <li key={index}>{amenity}</li>
                       ))
                     : language === 'fr'
-                    ? disabledAmenitiesF.split(',').map((amenity, index) => (
+                    ? amenitiesF.split(',').map((amenity, index) => (
                         <li key={index}>{amenity}</li>
                       ))
                     : null}
@@ -1360,7 +1438,7 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
                 {/* Book Now: <a href={"https://www.booking.com/"+{airline}} target="_blank" rel="noreferrer">
                 {"https://www.booking.com/"+airline}
               </a> */}
-             <Link to="/book">
+             <Link to="/book" onClick={handleBookNowSelection}>
 
 <Button variant="primary">
 {t("booknow")}
@@ -1380,20 +1458,28 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
   );}
 };
 
-let BusCard = ({ airline, departureBus, arrivalBus, duration, disabledAmenities, cost, departureBusTime, arrivalBusTime, departureBusReturnTime, arrivalBusReturnTime, returnbus, people, disabledAmenitiesF, language }) => {
-  let {hotelPrice=0, flightPrice=0, busesPrice=0, totalPrice = 0, setTotalPrice, setBusesPrice, setFlightPrice, setHotelPrice, isSelected, onSelect} = useContext(CardPricesContext);
+let BusCard = ({ airline, departureBus, arrivalBus, duration, disabledAmenities, cost, departureBusTime, arrivalBusTime, departureBusReturnTime, arrivalBusReturnTime, returnbus, people, amenitiesF, language }) => {
+  let {hotelPrice, flightPrice, busesPrice, totalPrice, selectedHotel, transportName,departureB,arrivalB,time1,time2,time3,transportType, settransportType, settime3,time4, settime4, settime2, settime1, setArrivalB, setDepartureB, settransportName, setSelectedHotel, setTotalPrice, setBusesPrice, setFlightPrice, setHotelPrice, isSelected, onSelect} = useContext(CardPricesContext);
   const { t } = useTranslation();
   const currentLanguage = i18n.language;
   const history = useHistory();
 
 
   const handleBookNowSelection = (e) => {
-    history.push('/booking');
+    // history.push('/booking');
+    setDepartureB(departureBus);
+    setArrivalB(arrivalBus);
+    settime1('');
+    settime2('');
+    settime3('');
+    settime4('');
+    settransportName('');
+    settransportType('Bus');
   };
 
   const handleSelection = (e) => {
     e.preventDefault();
-    setFlightPrice(cost*people);
+    setBusesPrice(cost*people);
   };
 
   return (
@@ -1432,20 +1518,14 @@ let BusCard = ({ airline, departureBus, arrivalBus, duration, disabledAmenities,
                         <li key={index}>{amenity}</li>
                       ))
                     : language === 'fr'
-                    ? disabledAmenitiesF.split(',').map((amenity, index) => (
+                    ? amenitiesF.split(',').map((amenity, index) => (
                         <li key={index}>{amenity}</li>
                       ))
                     : null}
                 </ul>}
                 </Col>
             </Row>
-            <Row>
-                <Col>
-                {t("booknow")}: <a href={"https://www.booking.com/"} target="_blank" rel="noreferrer">
-                {"https://www.booking.com"}
-              </a>
-                </Col>
-              </Row>
+            
             <Row>
                 <Col>
                 Cost: €{cost}
@@ -1456,11 +1536,26 @@ let BusCard = ({ airline, departureBus, arrivalBus, duration, disabledAmenities,
                 {t("grndtotal")}: €{cost*people}
                 </Col>
               </Row>
+              <Row>
+                <Col>
+                <Link to="/book" onClick={handleBookNowSelection}>
+
+<Button variant="primary" >
+{t("booknow")}
+</Button>
+</Link>
+                </Col>
+              </Row>
           </Card.Body>
         </Card>
         
         
         </div>
+        <Switch>
+          <Route exact path="/book">
+            <BookingPage />
+          </Route>
+        </Switch>
       </div>
     );
 };

@@ -51,8 +51,8 @@ export default {
     "Departdate":" Depart Date",
     "returndate":"Return Date",
     "triptype":"Trip Type",
-    "roundtrip":"roundtrip",
-    "oneway":"oneway",
+    "roundtrip":"Round trip",
+    "oneway":"One way",
     "from":"from",
     "to":"to",
     "egNY":"e.g. new york",
@@ -106,5 +106,7 @@ export default {
     "totalprice":"Total Price",
     "removeall":"Remove All",
     "selectall":"Select All",
+    "trvls":"Travellers",
+    "touristplaces": "Tourist Places"
 // ...
 };
