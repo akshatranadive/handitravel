@@ -774,9 +774,8 @@ function FlightPage() {
               </div>
               <div className="mb-2 col-md-2">
               <div>
-              
-              {t("budget/night")}
-             
+              <label htmlFor="num-people" className='fw-bolder text-primary'>{t("budget/night")} </label>
+
         {/* <Popup trigger={<a className='fw-bolder text-primary' data-toggle="tooltip" data-placement="right"  title="">     <BsFillQuestionCircleFill/></a>} position="bottom center"> */}
         <Popup trigger={<a className='fw-bolder text-primary' data-toggle="tooltip" data-placement="right"  title="">     <BsFillQuestionCircleFill/></a>} position="bottom center">
         
