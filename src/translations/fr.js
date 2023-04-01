@@ -105,6 +105,9 @@ export default {
 "onboardrefreshments":"Rafraîchissements à bord",
 "llpeepholes":"Interrupteurs et judas abaissés",
 "totalprice":"Prix ​​total",
+"removeall":"Enlever tout",
+"selectall":"Tout sélectionner",
+
 
 
     // ...

@@ -1,3 +1,4 @@
+import { useHistory, Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './FlightPage.css';
 import axios from 'axios';
 import React, { useState, useContext, useEffect } from 'react';
@@ -19,7 +20,9 @@ import { AiFillMedicineBox } from "react-icons/ai";
 import { MdTravelExplore } from "react-icons/md";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import BookingPage from './BookingPage';
 var data = require("./assets/ReturnFlightsData.json");
+
 
 function FlightPage() {
   const { t } = useTranslation();
@@ -55,6 +58,11 @@ function FlightPage() {
   const [nodataText, setnodataText] = useState("");
   const [nodataTextNotify, setnodataTextNotify] = useState("");
 
+  const history = useHistory();
+
+
+  //budget percent changing region
+
   
   const onArrivalClick = (event) => {
     setshowArrivalSearch(true);
@@ -68,6 +76,86 @@ function FlightPage() {
   const onChange = (event) => {
     setDeparture(event.target.value);
   };
+
+  // const handleTabChanges = (k) => {
+  //   setKey(k);
+  //   if(key=='hotels'){
+  //     callHotelDetails();
+  //   }
+  //   else if(key=='flight'){
+  //     callFlightDetails();
+  //   }
+  //   else if(key=='bus'){
+  //     callBusDetails();
+  //   }
+  // };
+
+
+
+  //handle select all/remove all
+
+  const handleSelectAllFlights = () => {
+    setSelectedFlightsDisability([
+	  "Special meals",
+	  "Wheelchair assistance",
+	  "Priority boarding",
+	  "Extra legroom",
+	  "Accessible lavatories",
+	  "Braille safety cards",
+	  "Sign language interpretation",
+	  "In-flight medical assistance",
+	  "Visual and auditory aids",
+	  "Priority baggage handling",
+	  "Accessible check-in counters",
+	  "Special seating arrangements"
+    ]);
+    // callFlightDetails();
+  };
+  const handleSelectAllHotels = () => {
+    setSelectedDisability([
+      "Visual alarm clocks",
+	  "Lowered light switches and peepholes",
+	  "Video remote interpreting (VRI)",
+	  "Staff trained in American Sign Language",
+	  "Portable hearing amplifier",
+	  "TTY phones",
+	  "Closed-captioned television",
+	  "Elevators or ramps",
+	  "Bed rails",
+	  "Shower chairs",
+	  "Accessible parking spots",
+	  "Roll-in showers with grab bars",
+	  "Wide doorways"
+    ]);
+    // callHotelDetails();
+  };
+  const handleSelectAllBuses = () => {
+    setSelectedBusesDisability([
+      "Wheelchair lift",
+	  "Accessible seating",
+	  "Audio announcements",
+	  "On-board restroom",
+	  "Air conditioning",
+	  "Bookable assistance",
+	  "On-board entertainment",
+	  "On-board refreshments"
+    ]);
+    // callBusDetails();
+  };
+
+  const handleRemoveAllFlights = () => {
+    setSelectedFlightsDisability([]);
+    // callFlightDetails();
+  };
+  const handleRemoveAllHotels = () => {
+    setSelectedDisability([]);
+    // callHotelDetails();
+  };
+  const handleRemoveAllBuses = () => {
+    setSelectedBusesDisability([]);
+    // callBusDetails();
+  };
+
 
 
   const onSearchDeparture = (searchTerm) => {
@@ -133,14 +221,18 @@ function FlightPage() {
     } else {
       setSelectedDisability(selectedDisability.filter((disability) => disability !== value));
     }
+
+    // callHotelDetails();
   }
-  const handleFlightCheckboxChange = (event) => {
+  let handleFlightCheckboxChange = (event) => {
     const { value, checked } = event.target;
     if (checked) {
       setSelectedFlightsDisability([...selectedFlightsDisability, value]);
     } else {
       setSelectedFlightsDisability(selectedFlightsDisability.filter((disability) => disability !== value));
     }
+
+    // callFlightDetails();
   }
   const handleBusesCheckboxChange = (event) => {
     const { value, checked } = event.target;
@@ -149,6 +241,8 @@ function FlightPage() {
     } else {
       setSelectedBusesDisability(selectedBusesDisability.filter((disability) => disability !== value));
     }
+
+    // callBusDetails();
   }
   let content;
   let ammenitiesContent;
@@ -166,235 +260,360 @@ function FlightPage() {
     );
     ammenitiesContent = (
       <div>
-        <div>
-        <Card>
-      <Card.Header className='bann'> <AiFillMedicineBox  style={{ marginRight: '5px' }} /> {t("amenities")} </Card.Header>
-      <Card.Body>
-      <ListGroup>
+          <div style={{ display: 'flex'}} className='my-2'>
+    <button type="button" className="btn btn-outline-success btn-sm" onClick={handleSelectAllHotels}>
+      {t("selectall")}
+    </button>
+    <button type="button" className="btn btn-outline-danger btn-sm" style={{ marginLeft: '5px' }} onClick={handleRemoveAllHotels}>
+      {t("removeall")}
+    </button>
+  </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="Visual" value="Visual alarm clocks" checked={selectedDisability.includes("Visual alarm clocks")} onChange={handleCheckboxChange}/>
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Visual" >{t("visualalarmclcks")}</label>
+      </div>     
        
-      <div className="checkbox-container1">
+       <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="llpeepholes" value="Lowered light switches and peepholes" checked={selectedDisability.includes("Lowered light switches and peepholes")} onChange={handleCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="llpeepholes" >{t("llpeepholes")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="Video" value="Video remote interpreting (VRI)" checked={selectedDisability.includes("Video remote interpreting (VRI)")} onChange={handleCheckboxChange}/>
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Video" >{t("vri")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="Staff" value="Staff trained in American Sign Language" checked={selectedDisability.includes("Staff trained in American Sign Language")} onChange={handleCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Staff" >{t("Stf_am")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="Portable1" value="Portable hearing amplifier" checked={selectedDisability.includes("Portable hearing amplifier")} onChange={handleCheckboxChange}/>
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Portable1" >{t("Pha")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="TTY" value="TTY phones" checked={selectedDisability.includes("TTY phones")} onChange={handleCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="TTY" >{t("ttyphones")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="Closed" value="Closed-captioned television" checked={selectedDisability.includes("Closed-captioned television")} onChange={handleCheckboxChange}/>
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Closed" >{t("cct")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="Elevators" value="Elevators or ramps" checked={selectedDisability.includes("Elevators or ramps")} onChange={handleCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Elevators" >{t("Elevators")}</label>
+      </div>
+      {/* <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="Bed" value="Bed rails" checked={selectedDisability.includes("Bed rails")} onChange={handleCheckboxChange}/>
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Bed" >{t("srch")}</label>
+      </div> */}
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="Shower" value="Shower chairs" checked={selectedDisability.includes("Shower chairs")} onChange={handleCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Shower" >{t("shwChairs")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="Accessible" value="Accessible parking spots" checked={selectedDisability.includes("Accessible parking spots")} onChange={handleCheckboxChange}/>
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Accessible" >{t("parking")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="Roll" value="Roll-in showers with grab bars" checked={selectedDisability.includes("Roll-in showers with grab bars")} onChange={handleCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Roll" >{t("showerBars")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="Wide" value="Wide doorways" checked={selectedDisability.includes("Wide doorways")} onChange={handleCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Wide" >{t("w_doorways")}</label>
+      </div>
+  </div>
+    
+    
+    );
+  } else if (key === 'flight') {
+    content = (
+      <div className="col-md-2">
+            <div className='fw-bolder text-primary'>{t("triptype")}</div>
+              <div classname="form-check">
+                <input
+                  classname="form-check-input"
+                  type="radio"
+                  name="trip-type"
+                  id="round-trip"
+                  value="round-trip"
+                  onClick={handleTripTypeChange}
+                  defaultChecked
+                />
+                <label classname="form-check-label" >
+                {t("roundtrip")}
+                </label>
+              </div>
+              <div classname="form-check">
+                <input
+                  classname="form-check-input"
+                  type="radio"
+                  name="trip-type"
+                  id="one-way"
+                  value="one-way"
+                  onClick={handleTripTypeChange}
+                />
+                <label classname="form-check-label" >
+                {t("oneway")}
+                </label>
+              </div>
+            </div>
+    );
+  
+    ammenitiesContent = (  
+    <div>
+        <div style={{ display: 'flex'}} className='my-2'>
+    <button type="button" className="btn btn-outline-success btn-sm" onClick={handleSelectAllFlights}>
+      {t("selectall")}
+    </button>
+    <button type="button" className="btn btn-outline-danger btn-sm" style={{ marginLeft: '5px' }} onClick={handleRemoveAllFlights}>
+      {t("removeall")}
+    </button>
+  </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="specialmeals" value="Special meals" checked={selectedFlightsDisability.includes("Special meals")} onChange={handleFlightCheckboxChange}/>
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="specialmeals" >{t("specialmeals")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="wheelchairassistance" value="Wheelchair assistance" checked={selectedFlightsDisability.includes("Wheelchair assistance")} onChange={handleFlightCheckboxChange}/>
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="wheelchairassistance" >{t("wheelchairassistance")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="Priorityboarding" value="Priority boarding" checked={selectedFlightsDisability.includes("Priority boarding")} onChange={handleFlightCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Priorityboarding" >{t("Priorityboarding")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="extralegroom" value="Extra legroom" checked={selectedFlightsDisability.includes("Extra legroom")} onChange={handleFlightCheckboxChange}/>
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="extralegroom" >{t("extralegroom")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="accessiblelavatories" value="Accessible lavatories" checked={selectedFlightsDisability.includes("Accessible lavatories")} onChange={handleFlightCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="accessiblelavatories" >{t("accessiblelavatories")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="braillesafetycards" value="Braille safety cards" checked={selectedFlightsDisability.includes("Braille safety cards")} onChange={handleFlightCheckboxChange}/>
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="braillesafetycards" >{t("braillesafetycards")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="signlanguageinterpretation" value="Sign language interpretation" checked={selectedFlightsDisability.includes("Sign language interpretation")} onChange={handleFlightCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="signlanguageinterpretation" >{t("signlanguageinterpretation")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="medicalassistance" value="In-flight medical assistance" checked={selectedFlightsDisability.includes("In-flight medical assistance")} onChange={handleFlightCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="medicalassistance" >{t("medicalassistance")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="visualauditoryaids" value="Visual and auditory aids" checked={selectedFlightsDisability.includes("Visual and auditory aids")} onChange={handleFlightCheckboxChange}/>
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="visualauditoryaids" >{t("visualauditoryaids")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="prioritybaggagehandling" value="Priority baggage handling" checked={selectedFlightsDisability.includes("Priority baggage handling")} onChange={handleFlightCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="prioritybaggagehandling" >{t("prioritybaggagehandling")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="Accessiblecheckincounters" value="Accessible check-in counters" checked={selectedFlightsDisability.includes("Accessible check-in counters")} onChange={handleFlightCheckboxChange}/>
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Accessiblecheckincounters" >{t("Accessiblecheckincounters")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="seatarrangement" value="Special seating arrangements" checked={selectedFlightsDisability.includes("Special seating arrangements")} onChange={handleFlightCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="seatarrangement" >{t("seatarrangement")}</label>
+      </div>
+     
+  </div>);
+  } else if(key === 'bus') {
+    content = (
+      <div></div>
+    );
+    ammenitiesContent = (
+      <div>
+          <div style={{ display: 'flex' }} className='my-2'>
+    <button type="button" className="btn btn-outline-success btn-sm" onClick={handleSelectAllBuses}>
+      {t("selectall")}
+    </button>
+    <button type="button" className="btn btn-outline-danger btn-sm" style={{ marginLeft: '5px' }} onClick={handleRemoveAllBuses}>
+      {t("removeall")}
+    </button>
+  </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+    <input type="checkbox" className="form-check-input" id="wheelchairlift" value="Wheelchair lift" checked={selectedBusesDisability.includes("Wheelchair lift")} onChange={handleBusesCheckboxChange}/>
+    <label className="form-check-label" htmlFor="wheelchairlift">{t("wheelchairlift")}</label>
+  </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="accessibleseating" value="Accessible seating" checked={selectedBusesDisability.includes("Accessible seating")} onChange={handleBusesCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="accessibleseating" >{t("accessibleseating")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="audioannouncements" value="Audio announcements" checked={selectedBusesDisability.includes("Audio announcements")} onChange={handleBusesCheckboxChange}/>
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="audioannouncements">{t("audioannouncements")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="onboardrestroom" value="On-board restroom" checked={selectedBusesDisability.includes("On-board restroom")} onChange={handleBusesCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="onboardrestroom" >{t("onboardrestroom")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="AC" value="Air conditioning" checked={selectedBusesDisability.includes("Air conditioning")} onChange={handleBusesCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="AC" >{t("AC")}</label>
+      </div>
+     <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="Bassistance" value="Bookable assistance" checked={selectedBusesDisability.includes("Bookable assistance")} onChange={handleBusesCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Bassistance" >{t("Bassistance")}</label>
+      </div>
+      <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="onboardentertainment" value="On-board entertainment" checked={selectedBusesDisability.includes("On-board entertainment")} onChange={handleBusesCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="onboardentertainment" >{t("onboardentertainment")}</label>
+      </div>
+     <div className="form-check" style={{ borderBottom: '1px solid #ccc', padding: '5px 0' }}>
+        <input type="checkbox" className="form-check-input" id="onboardrefreshments" value="On-board refreshments" checked={selectedBusesDisability.includes("On-board refreshments")} onChange={handleBusesCheckboxChange} />
+        <label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="onboardrefreshments" >{t("onboardrefreshments")}</label>
+      </div>
 
-<div class="checkbox">
-<div className="form-check">
+  </div>
+    );
+  }
 
-<input type="checkbox" className="form-check-input" id="Visual" value="Visual alarm clocks" checked={selectedDisability.includes("Visual alarm clocks")} onChange={handleCheckboxChange}/>
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Visual" >{t("visualalarmclcks")}</label>
-</div>     
+  const callHotelDetails = () => {
+    
+      
+    let searchParams = {
+      // destination: destination,
+      // checkin: checkin,
+      // checkout: checkout,
+      // numOfPeople: numOfPeople,
+      location:arrival,
+      budget: budget*(0.3),
+      disability:selectedDisability,
+      // country:selectedCountry,
+      // selectedValue: selectedValue
+    };
+    
+    // setHotelPrice(0);
+    axios.get('https://handitravel-server-git-testserverbr-akshatranadive.vercel.app/hotel', { params: searchParams })
+    .then(response => {
+      let res = response.data;
+      //change
+      let sorted = [];
+      let filteredHotels = [];
+      filteredHotels = res.filter(hotel => hotel.type == selectedValue && hotel.country == selectedCountry);
+      sorted = [...filteredHotels].sort((b ,a) => b.bestPrice - a.bestPrice);
 
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="llpeepholes" value="Lowered light switches and peepholes" checked={selectedDisability.includes("Lowered light switches and peepholes")} onChange={handleCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="llpeepholes" >{t("llpeepholes")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="Video" value="Video remote interpreting (VRI)" checked={selectedDisability.includes("Video remote interpreting (VRI)")} onChange={handleCheckboxChange}/>
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Video" >{t("vri")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="Staff" value="Staff trained in American Sign Language" checked={selectedDisability.includes("Staff trained in American Sign Language")} onChange={handleCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Staff" >{t("Stf_am")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="Portable1" value="Portable hearing amplifier" checked={selectedDisability.includes("Portable hearing amplifier")} onChange={handleCheckboxChange}/>
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Portable1" >{t("Pha")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="TTY" value="TTY phones" checked={selectedDisability.includes("TTY phones")} onChange={handleCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="TTY" >{t("ttyphones")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="Closed" value="Closed-captioned television" checked={selectedDisability.includes("Closed-captioned television")} onChange={handleCheckboxChange}/>
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Closed" >{t("cct")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="Elevators" value="Elevators or ramps" checked={selectedDisability.includes("Elevators or ramps")} onChange={handleCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Elevators" >{t("Elevators")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="Bed" value="Bed rails" checked={selectedDisability.includes("Bed rails")} onChange={handleCheckboxChange}/>
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Bed" >{t("Bed")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="Shower" value="Shower chairs" checked={selectedDisability.includes("Shower chairs")} onChange={handleCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Shower" >{t("shwChairs")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="Accessible" value="Accessible parking spots" checked={selectedDisability.includes("Accessible parking spots")} onChange={handleCheckboxChange}/>
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Accessible" >{t("parking")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="Roll" value="Roll-in showers with grab bars" checked={selectedDisability.includes("Roll-in showers with grab bars")} onChange={handleCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Roll" >{t("showerBars")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="Wide" value="Wide doorways" checked={selectedDisability.includes("Wide doorways")} onChange={handleCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Wide" >{t("w_doorways")}</label>
-</div>
-</div>
-</div>
+      if(sorted.length === 0){
+        setnodataText("No data found for required destination, budget and amenities.");
+        setnodataTextNotify("We have notified server for your requirements! Try with different parameters.");
+      }
+      else{
+        setnodataText("");
+        setnodataTextNotify("");
+      }
+      sorted.forEach(hotel => {
+        let amenitiesSet = new Set(hotel.amenities.split(', '));
+        // let newAmenities = ["amenity1", "amenity2", "amenity3"]; // replace with your own amenities data
+        // selectedDisability.forEach(amenity => {
+        //   if (!amenitiesSet.has(amenity)) {
+        //     amenitiesSet.add(amenity);
+        //   }
+        // });
+        hotel.location = arrival;
+        // hotel.amenities = Array.from(amenitiesSet).join(', ');
+      });
+  
+      setHotels(sorted);
+    })
+    .catch(error => {
+      console.log(error);
+    });  
 
-</ListGroup>
-</Card.Body>
-</Card>
-</div>
-</div>
+  };
+  const callFlightDetails = () => {
 
+      
+    const searchParams = {
+      departure,
+      arrival,
+      // departDate,
+      // returnDate,
+      // numPeople,
+      amenities:selectedFlightsDisability,
+      type: key,
+      returnTrip: tripType == 'round-trip' ? true : false,
+      budget: budget/2,
+    };
+    // setFlightPrice(0);
+    axios.get('https://handitravel-server-git-testserverbr-akshatranadive.vercel.app/flights', { params: searchParams })
+    .then(response => {
+      let res = [];
+      res = response.data;
+      if(res.length === 0){
+        setnodataText("No data found for required destination, budget and amenities.");
+        setnodataTextNotify("We have notified server for your requirements! Try with different parameters.");
+      }
+      else{
+        setnodataText("");
+        setnodataTextNotify("");
+      }
+      //change
+      let sorted = [];
+      sorted = [...res].sort((b ,a) => b.cost - a.cost);
+      
+      sorted.forEach(flight => {
+        let amenitiesSet = new Set(flight.ammenities.split(','));
+        // let newAmenities = ["amenity1", "amenity2", "amenity3"]; // replace with your own amenities data
+        selectedFlightsDisability.forEach(amenity => {
+          if (!amenitiesSet.has(amenity)) {
+            amenitiesSet.add(amenity);
+          }
+        });
+        flight.ammenities = Array.from(amenitiesSet).join(',');
+      });
+      setFlight(sorted);
+    })
+    .catch(error => {
+      console.log(error);
+    });  
+  
+  };
+  const callBusDetails = () => {
 
+    const searchParams = {
+      to: arrival,
+      from: departure,
+      amenities:selectedBusesDisability,
+      // departDateBus,
+      // returnDateBus,
+      // numPeopleBus,
+      budget: budget*(0.2),
+      //returnTrip: tripType == 'round-trip' ? true : false 
+    };
 
-);
-} else if (key === 'flight') {
-content = (
-<div className="col-md-2">
-   <div className='fw-bolder text-primary'>{t("triptype")}</div>
-     <div classname="form-check">
-       <input
-         classname="form-check-input"
-         type="radio"
-         name="trip-type"
-         id="round-trip"
-         value="round-trip"
-         onClick={handleTripTypeChange}
-         defaultChecked
-       />
-       <label classname="form-check-label"  >
-       {t("roundtrip")}
-       </label>
-     </div>
-     <div classname="form-check">
-       <input
-         classname="form-check-input"
-         type="radio"
-         name="trip-type"
-         id="one-way"
-         value="one-way"
-         onClick={handleTripTypeChange}
-       />
-       <label classname="form-check-label"  >
-       {t("oneway")}
-       </label>
-     </div>
-   </div>
-);
-
-ammenitiesContent = (  <div>
-<Card>
-<Card.Header className='bann'> <AiFillMedicineBox  style={{ marginRight: '5px' }} />  {t("amenities")}</Card.Header>
-<Card.Body>
-<ListGroup>
-<div className="checkbox-container1">
-<div className="form-check"> 
-<input type="checkbox" className="form-check-input" id="specialmeals" value="Special meals" checked={selectedFlightsDisability.includes("Special meals")} onChange={handleFlightCheckboxChange}/>
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="specialmeals" >{t("specialmeals")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="wheelchairassistance" value="Wheelchair assistance" checked={selectedFlightsDisability.includes("Wheelchair assistance")} onChange={handleFlightCheckboxChange}/>
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="wheelchairassistance" >{t("wheelchairassistance")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="Priorityboarding" value="Priority boarding" checked={selectedFlightsDisability.includes("Priority boarding")} onChange={handleFlightCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Priorityboarding" >{t("Priorityboarding")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="extralegroom" value="Extra legroom" checked={selectedFlightsDisability.includes("Extra legroom")} onChange={handleFlightCheckboxChange}/>
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="extralegroom" >{t("extralegroom")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="accessiblelavatories" value="Accessible lavatories" checked={selectedFlightsDisability.includes("Accessible lavatories")} onChange={handleFlightCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="accessiblelavatories" >{t("accessiblelavatories")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="braillesafetycards" value="Braille safety cards" checked={selectedFlightsDisability.includes("Braille safety cards")} onChange={handleFlightCheckboxChange}/>
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="braillesafetycards" >{t("braillesafetycards")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="signlanguageinterpretation" value="Sign language interpretation" checked={selectedFlightsDisability.includes("Sign language interpretation")} onChange={handleFlightCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="signlanguageinterpretation" >{t("signlanguageinterpretation")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="medicalassistance" value="In-flight medical assistance" checked={selectedFlightsDisability.includes("In-flight medical assistance")} onChange={handleFlightCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="medicalassistance" >{t("medicalassistance")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="visualauditoryaids" value="Visual and auditory aids" checked={selectedFlightsDisability.includes("Visual and auditory aids")} onChange={handleFlightCheckboxChange}/>
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="visualauditoryaids" >{t("visualauditoryaids")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="prioritybaggagehandling" value="Priority baggage handling" checked={selectedFlightsDisability.includes("Priority baggage handling")} onChange={handleFlightCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="prioritybaggagehandling" >{t("prioritybaggagehandling")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="Accessiblecheckincounters" value="Accessible check-in counters" checked={selectedFlightsDisability.includes("Accessible checking Counters")} onChange={handleFlightCheckboxChange}/>
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Accessiblecheckincounters" >{t("Accessiblecheckincounters")}</label>
-</div>
-<div className="form-check">
-<input type="checkbox" className="form-check-input" id="seatarrangement" value="Special seating arrangements" checked={selectedFlightsDisability.includes("Special seating arrangements")} onChange={handleFlightCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="seatarrangement" >{t("seatarrangement")}</label>
-</div>
-</div>
-</ListGroup>
-</Card.Body>
-</Card>
-</div>);
-} else if(key === 'bus') {
-content = (
-<div></div>
-);
-ammenitiesContent = (
-<div>
-  <Card>
-<Card.Header className='bann'> <AiFillMedicineBox  style={{ marginRight: '5px' }} />  {t("amenities")}</Card.Header>
-<Card.Body>
-
-
-<div className="checkbox-container1">
-<div className="form-check">
-
-<input type="checkbox" className="form-check-input" id="wheelchairlift" value="Wheelchair lift" checked={selectedBusesDisability.includes("Wheelchair lift")} onChange={handleBusesCheckboxChange}/>
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="wheelchairlift" >{t("wheelchairlift")}</label>
-</div>
-<div className="form-check">
-
-<input type="checkbox" className="form-check-input" id="accessibleseating" value="Accessible seating" checked={selectedBusesDisability.includes("Accessible seating")} onChange={handleBusesCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="accessibleseating" >{t("accessibleseating")}</label>
-</div>
-<div className="form-check">
-
-<input type="checkbox" className="form-check-input" id="audioannouncements" value="Audio announcements" checked={selectedBusesDisability.includes("Audio announcements")} onChange={handleBusesCheckboxChange}/>
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="audioannouncements" >{t("audioannouncements")}</label>
-</div>
-<div className="form-check">
-
-<input type="checkbox" className="form-check-input" id="onboardrestroom" value="On-board restroom" checked={selectedBusesDisability.includes("On-board restroom")} onChange={handleBusesCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="onboardrestroom" >{t("onboardrestroom")}</label>
-</div>
-<div className="form-check">
-
-<input type="checkbox" className="form-check-input" id="AC" value="Air conditioning" checked={selectedBusesDisability.includes("Air conditioning")} onChange={handleBusesCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="AC" >{t("AC")}</label>
-</div>
-<div className="form-check">
-
-<input type="checkbox" className="form-check-input" id="Bassistance" value="Bookable assistance" checked={selectedBusesDisability.includes("Bookable assistance")} onChange={handleBusesCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="Bassistance" >{t("Bassistance")}</label>
-</div>
-<div className="form-check">
-
-<input type="checkbox" className="form-check-input" id="onboardentertainment" value="On-board entertainment" checked={selectedBusesDisability.includes("On-board entertainment")} onChange={handleBusesCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="onboardentertainment" >{t("onboardentertainment")}</label>
-</div>
-<div className="form-check">
-
-<input type="checkbox" className="form-check-input" id="onboardrefreshments" value="On-board refreshments" checked={selectedBusesDisability.includes("On-board refreshments")} onChange={handleBusesCheckboxChange} />
-<label className="form-check-label" style={{  display: 'flex', flexWrap: 'wrap' }} htmlFor="onboardrefreshments" >{t("onboardrefreshments")}</label>
-</div>
-</div>
-
-
-
-</Card.Body>
-</Card>
-</div>
-);
-}
+    // setBusesPrice(0);
+    axios.get('https://handitravel-server-git-testserverbr-akshatranadive.vercel.app/buses', { params: searchParams })
+    .then(response => {
+        let res = response.data;
+        if(res.length === 0){
+          setnodataText("No data found for required destination, budget and amenities.");
+          setnodataTextNotify("We have notified server for your requirements! Try with different parameters.");
+        }
+        else{
+          setnodataText("");
+          setnodataTextNotify("");
+        }
+        //change
+        let sorted = [...res].sort((b ,a) => b.cost - a.cost);
+  
+        sorted.forEach(bus => {
+          let amenitiesSet = new Set(bus.amenities.split(','));
+          // let newAmenities = ["amenity1", "amenity2", "amenity3"]; // replace with your own amenities data
+          selectedBusesDisability.forEach(amenity => {
+            if (!amenitiesSet.has(amenity)) {
+              amenitiesSet.add(amenity);
+            }
+          });
+          bus.amenities = Array.from(amenitiesSet).join(',');
+        });
+        setBuses(sorted);
+      })
+      .catch(error => {
+        console.log(error);
+      }); 
+  };
 
   const handleTripTypeChangeBus = (e) => {
     setTripType(e.target.value);
@@ -417,145 +636,13 @@ ammenitiesContent = (
 
     
     if(key=='hotels'){
-      
-      let searchParams = {
-        // destination: destination,
-        // checkin: checkin,
-        // checkout: checkout,
-        // numOfPeople: numOfPeople,
-        location:arrival,
-        budget: budget*(0.3),
-        disability:selectedDisability,
-        // country:selectedCountry,
-        // selectedValue: selectedValue
-      };
-      
-      // setHotelPrice(0);
-      axios.get('https://handitravel-server-git-testserverbr-akshatranadive.vercel.app/hotel', { params: searchParams })
-      .then(response => {
-        let res = response.data;
-        //change
-        
-        let sorted = [];
-        let filteredHotels = [];
-        filteredHotels = res.filter(hotel => hotel.type == selectedValue && hotel.country == selectedCountry);
-        sorted = [...filteredHotels].sort((b ,a) => b.bestPrice - a.bestPrice);
-
-        if(sorted.length === 0){
-          setnodataText("No data found for required destination, budget and amenities.");
-          setnodataTextNotify("We have notified server for your requirements! Try with different parameters.");
-        }
-        else{
-          setnodataText("");
-          setnodataTextNotify("");
-        }
-        sorted.forEach(hotel => {
-          let amenitiesSet = new Set(hotel.amenities.split(', '));
-          // let newAmenities = ["amenity1", "amenity2", "amenity3"]; // replace with your own amenities data
-          selectedDisability.forEach(amenity => {
-            if (!amenitiesSet.has(amenity)) {
-              amenitiesSet.add(amenity);
-            }
-          });
-          hotel.location = arrival;
-          hotel.amenities = Array.from(amenitiesSet).join(', ');
-        });
-    
-        setHotels(sorted);
-      })
-      .catch(error => {
-        console.log(error);
-      });  
-      
+      callHotelDetails();
     }
     else if(key=='flight'){
-      
-      const searchParams = {
-        departure,
-        arrival,
-        // departDate,
-        // returnDate,
-        // numPeople,
-        amenities:selectedFlightsDisability,
-        type: key,
-        returnTrip: tripType == 'round-trip' ? true : false,
-        budget: budget/2,
-      };
-      // setFlightPrice(0);
-      axios.get('https://handitravel-server-git-testserverbr-akshatranadive.vercel.app/flights', { params: searchParams })
-      .then(response => {
-        let res = [];
-        res = response.data;
-        if(res.length === 0){
-          setnodataText("No data found for required destination, budget and amenities.");
-          setnodataTextNotify("We have notified server for your requirements! Try with different parameters.");
-        }
-        else{
-          setnodataText("");
-          setnodataTextNotify("");
-        }
-        //change
-        let sorted = [];
-        sorted = [...res].sort((b ,a) => b.cost - a.cost);
-        
-        sorted.forEach(flight => {
-          let amenitiesSet = new Set(flight.ammenities.split(','));
-          // let newAmenities = ["amenity1", "amenity2", "amenity3"]; // replace with your own amenities data
-          selectedFlightsDisability.forEach(amenity => {
-            if (!amenitiesSet.has(amenity)) {
-              amenitiesSet.add(amenity);
-            }
-          });
-          flight.ammenities = Array.from(amenitiesSet).join(',');
-        });
-        setFlight(sorted);
-      })
-      .catch(error => {
-        console.log(error);
-      });  
+      callFlightDetails();
     }
     else if(key=='bus'){
-      const searchParams = {
-        to: arrival,
-        from: departure,
-        amenities:selectedBusesDisability,
-        // departDateBus,
-        // returnDateBus,
-        // numPeopleBus,
-        budget: budget*(0.2),
-        //returnTrip: tripType == 'round-trip' ? true : false 
-      };
-
-      // setBusesPrice(0);
-      axios.get('https://handitravel-server-git-testserverbr-akshatranadive.vercel.app/buses', { params: searchParams })
-      .then(response => {
-          let res = response.data;
-          if(res.length === 0){
-            setnodataText("No data found for required destination, budget and amenities.");
-            setnodataTextNotify("We have notified server for your requirements! Try with different parameters.");
-          }
-          else{
-            setnodataText("");
-            setnodataTextNotify("");
-          }
-          //change
-          let sorted = [...res].sort((b ,a) => b.cost - a.cost);
-    
-          sorted.forEach(bus => {
-            let amenitiesSet = new Set(bus.amenities.split(','));
-            // let newAmenities = ["amenity1", "amenity2", "amenity3"]; // replace with your own amenities data
-            selectedBusesDisability.forEach(amenity => {
-              if (!amenitiesSet.has(amenity)) {
-                amenitiesSet.add(amenity);
-              }
-            });
-            bus.amenities = Array.from(amenitiesSet).join(',');
-          });
-          setBuses(sorted);
-        })
-        .catch(error => {
-          console.log(error);
-        }); 
+      callBusDetails();
     }
   };
 
@@ -578,9 +665,9 @@ ammenitiesContent = (
             <Dropdown.Item eventKey="UAE">UAE</Dropdown.Item>
             <Dropdown.Item eventKey="Canada">Canada</Dropdown.Item>
             <Dropdown.Item eventKey="France">France</Dropdown.Item>
-            {/* <Dropdown.Item eventKey="USA">USA</Dropdown.Item>
+            <Dropdown.Item eventKey="USA">USA</Dropdown.Item>
             <Dropdown.Item eventKey="UK">UK</Dropdown.Item>
-            <Dropdown.Item eventKey="Australia">Australia</Dropdown.Item> */}
+            <Dropdown.Item eventKey="Australia">Australia</Dropdown.Item>
             </DropdownButton>
           </div>
           <div className="form-group col-md-2">
@@ -600,7 +687,6 @@ ammenitiesContent = (
                       <div onClick={()=>onSearchDeparture(departureLocation)} key={departureLocation} className="dropdown1-row">{departureLocation}</div>
                     ))}
                 </div>
-
 
                 </div>
               </div>
@@ -690,13 +776,14 @@ ammenitiesContent = (
 
             <Tabs
         id="search-tabs"
-        activeKey={key}
+        // onChange={ handleTabChanges }
         onSelect={(k) => setKey(k)}
+        activeKey={key}
       >
         <Tab eventKey="hotels" title={<><FaHotel /> {t("hotels")}</>} > 
         <div className='row my-2'>
   {hotels.length > 0 ? (
-    <div className='ms-5'>
+    <div className='ms-1'>
       {hotels.map(hotel => (
         <HotelCard
         key={hotel._id}
@@ -717,6 +804,8 @@ ammenitiesContent = (
         onSelect={() => handleHotelSelection(hotel.name)}
         hospital={hotel.hospital}
         distance={hotel.distance}
+        amenitiesF={hotel.amenitiesF}
+        language={currentLanguage}
         />
       ))}
     </div>
@@ -744,6 +833,8 @@ ammenitiesContent = (
             cost={flight.cost}
             returnFlight={tripType}
             people={numPeople}
+            amenitiesF={flight.amenitiesF}
+            language={currentLanguage}
           />
         ))
       ) : (
@@ -761,6 +852,8 @@ ammenitiesContent = (
             cost={flight.cost} 
             returnFlight={tripType}
             people={numPeople}
+            amenitiesF={flight.amenitiesF}
+            language={currentLanguage}
           />
         ))
       )}
@@ -788,7 +881,9 @@ ammenitiesContent = (
           disabledAmenities={bus.amenities}
           cost={bus.cost}
           returnFlight={tripType}
+          amenitiesF={bus.amenitiesF}
           people={numPeople}
+          language={currentLanguage}
         />
       ))}
     </div>
@@ -833,16 +928,16 @@ function TotalCard() {
   const currentLanguage = i18n.language;
 
 
-  let handleClick = () => {
-    const cardDetails = {
-      hotelPrice,
-      flightPrice,
-      busesPrice,
-      totalPrice
-    };
-    console.log(cardDetails);
-    setBorderColor('primary');
-  };
+  // let handleClick = () => {
+  //   const cardDetails = {
+  //     hotelPrice,
+  //     flightPrice,
+  //     busesPrice,
+  //     totalPrice
+  //   };
+  //   console.log(cardDetails);
+  //   setBorderColor('primary');
+  // };
 
   
 
@@ -903,7 +998,7 @@ function BannedMedicinesCard({country}) {
   );
 }
 
-function HotelCard({ hotelName, accomodationType, bestPrice, price1, price2, price3, country, location, ammenities, days, people, hospital, distance }) {
+function HotelCard({ hotelName, accomodationType, bestPrice, price1, price2, price3, country, location, ammenities, amenitiesF, days, people, hospital, distance, language }) {
   const [isExpanded, setIsExpanded] = useState(false);
   let [borderColor, setBorderColor] = useState('light');
   const [isSelected, setIsSelected] = useState(false);
@@ -969,28 +1064,41 @@ const handleDataChange = () => {
 
 
 return (  
-  <Card className='my-3 shadow-inner' onClick={handleSelection} style={{ cursor: 'pointer' }}> 
+  <Card className='my-3 shadow-inner'> 
   <Card.Body>
+    <div onClick={handleSelection} style={{ cursor: 'pointer' }}>
+
     <Card.Title>{hotelName}</Card.Title>
     <Card.Subtitle className="mb-2 text-muted">
     {t("bestPrice_night")}: €{bestPrice}<br></br>
     {t("accomodationtype")}: {accomodationType}
+      <Card.Text className='fw-bold'>{t("grndtotal")}: <span  onChange={(e) => { handleDataChange(); return e.target.value; }} className='fw-light'><span className='fw-bold'>{bestPrice}</span>(Best Price)*<span className='fw-bold'>{days}</span>(Number of nights)*<span className='fw-bold'>{people}</span>(Number of people) = </span><span className='fw-bold'>€{grandtotal}</span></Card.Text>
     </Card.Subtitle>
-    <Card.Text className='fw-bold'>{t("amenities")}:</Card.Text>
-    <ul>
-            {ammenities.split(',').map((amenity, index) => (
-              <li key={index}>{amenity}</li>
-            ))}
-          </ul>
-    <Card.Text className='fw-bold' >{t("destination")}: <span className='fw-light'>{location}</span></Card.Text>
-    <Card.Text className='fw-bold' >{t("hospital")}: <span className='fw-light'>{hospital}</span></Card.Text>
-    <Card.Text className='fw-bold' >{t("dhospital")}: <span className='fw-light'>{distance}km</span></Card.Text>
-    <Card.Text className='fw-bold'>{t("grndtotal")}: <span  onChange={(e) => { handleDataChange(); return e.target.value; }} className='fw-light'><span className='fw-bold'>{bestPrice}</span>(Best Price)*<span className='fw-bold'>{days}</span>(Number of nights)*<span className='fw-bold'>{people}</span>(Number of people) = </span><span className='fw-bold'>€{grandtotal}</span></Card.Text>
+    </div>
     <Button variant="primary" onClick={handleExpansion}>
       {isExpanded ? <BiUpArrow/> : <BiDownArrow/>}
     </Button>
     {isExpanded && (
+      
       <ListGroup className="mt-3">
+            <Card.Text className='fw-bold'>{t("amenities")}:</Card.Text>
+            <ul>
+  {language === 'en'
+    ? ammenities.split(',').map((amenity, index) => (
+        <li key={index}>{amenity}</li>
+      ))
+    : language === 'fr'
+    ? amenitiesF.split(',').map((amenity, index) => (
+        <li key={index}>{amenity}</li>
+      ))
+    : null}
+</ul>
+
+    <Card.Text className='fw-bold' >{t("destination")}: <span className='fw-light'>{location}</span></Card.Text>
+    <Card.Text className='fw-bold' >{t("hospital")}: <span className='fw-light'>{hospital}</span></Card.Text>
+    <Card.Text className='fw-bold' >{t("dhospital")}: <span className='fw-light'>{distance}km</span></Card.Text>
+
+        
         <Card.Text ><span className='fw-bold'>Compare prices : </span></Card.Text>
         {/* {hotelLinks.map((link, index) => ( */}
           <ListGroupItem >
@@ -1026,10 +1134,14 @@ return (
 );
 };
 
-let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, cost, departureTime, arrivalTime, departureReturnTime, arrivalReturnTime, returnFlight, people }) => {
+let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, cost, departureTime, arrivalTime, departureReturnTime, arrivalReturnTime, returnFlight, people, disabledAmenitiesF, language }) => {
   let {hotelPrice=0, flightPrice=0, busesPrice=0, totalPrice = 0, setTotalPrice, setBusesPrice, setFlightPrice, setHotelPrice, isSelected, onSelect} = useContext(CardPricesContext);
   const { t } = useTranslation();
   const currentLanguage = i18n.language;
+
+  const handleBookNowSelection = () => {
+    // history.push('/booking');
+  };
 
   const handleSelection = (e) => {
     e.preventDefault();
@@ -1044,11 +1156,11 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
         </div>
         <div className='col-md-10'>
 
-        <Card className='my-2 marginone'  onClick={handleSelection} style={{ cursor: 'pointer' }}>
+        <Card className='my-2 marginone' onClick={handleSelection} style={{ cursor: 'pointer' }}>
           <Card.Body>
             <Row>
               <Col>
-              <Card.Title>{airline}</Card.Title>
+              <Card.Title >{airline}</Card.Title>
               </Col>
               <Col></Col>
               <Col></Col>
@@ -1082,17 +1194,29 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
             <Card.Text className='fw-bold'>{t("amenities")}:</Card.Text>
                   {disabledAmenities && 
                   <ul>
-                  {disabledAmenities.split(',').map((amenity, index) => (
-                    <li key={index}>{amenity}</li>
-                  ))}
+                  {language === 'en'
+                    ? disabledAmenities.split(',').map((amenity, index) => (
+                        <li key={index}>{amenity}</li>
+                      ))
+                    : language === 'fr'
+                    ? disabledAmenitiesF.split(',').map((amenity, index) => (
+                        <li key={index}>{amenity}</li>
+                      ))
+                    : null}
                 </ul>}
                 </Col>
             </Row>
             <Row>
                 <Col>
-                {t("booknow")}: <a href={"https://www.booking.com/"+{airline}} target="_blank" rel="noreferrer">
+                {/* {t("booknow")}: <a href={"https://www.booking.com/"+{airline}} target="_blank" rel="noreferrer">
                 {"https://www.booking.com/"+airline}
-              </a>
+              </a> */}
+              <Link to="/book">
+
+                <Button variant="primary" onClick={handleSelection}>
+              {t("booknow")}
+            </Button>
+            </Link>
                 </Col>
               </Row>
             <Row>
@@ -1102,9 +1226,12 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
               </Row>
           </Card.Body>
         </Card>
-        
-        
         </div>
+        <Switch>
+          <Route exact path="/book">
+            <BookingPage />
+          </Route>
+        </Switch>
       </div>
     );
   }
@@ -1144,26 +1271,31 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
               <Row>
                 <Col>
                 <Card.Text className='fw-bold'>{t("amenities")}:</Card.Text>
-                  {disabledAmenities && 
+                {disabledAmenities && 
                   <ul>
-                  {disabledAmenities.split(',').map((amenity, index) => (
-                    <li key={index}>{amenity}</li>
-                  ))}
+                  {language === 'en'
+                    ? disabledAmenities.split(',').map((amenity, index) => (
+                        <li key={index}>{amenity}</li>
+                      ))
+                    : language === 'fr'
+                    ? disabledAmenitiesF.split(',').map((amenity, index) => (
+                        <li key={index}>{amenity}</li>
+                      ))
+                    : null}
                 </ul>}
                 </Col>
               </Row>
               <Row>
                 <Col>
-                {t("booknow")}: <a href={"https://www.booking.com/"+{airline}}target="_blank" rel="noreferrer">
+                {/* {t("booknow")}: <a href={"https://www.booking.com/"+{airline}}target="_blank" rel="noreferrer">
                 {"https://www.booking.com/"+airline}
-              </a>
+              </a> */}
+              {/* <Button variant="primary" onClick={handleSelection}>
+              {t("booknow")}
+            </Button> */}
                 </Col>
               </Row>
-              <Row>
-                <Col className='fw-bolder'>
-                {/* Grand Total: €{people * cost} */}
-                </Col>
-              </Row>
+              
             </Card.Body>
           </Card>
           <svg height="50" width="50">
@@ -1204,19 +1336,18 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
               <Row>
               <Col>
               <Card.Text className='fw-bold'>{t("amenities")}:</Card.Text>
-                  {disabledAmenities && 
+              {disabledAmenities && 
                   <ul>
-                  {disabledAmenities.split(',').map((amenity, index) => (
-                    <li key={index}>{amenity}</li>
-                  ))}
+                  {language === 'en'
+                    ? disabledAmenities.split(',').map((amenity, index) => (
+                        <li key={index}>{amenity}</li>
+                      ))
+                    : language === 'fr'
+                    ? disabledAmenitiesF.split(',').map((amenity, index) => (
+                        <li key={index}>{amenity}</li>
+                      ))
+                    : null}
                 </ul>}
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                Book Now: <a href={"https://www.booking.com/"+{airline}} target="_blank" rel="noreferrer">
-                {"https://www.booking.com/"+airline}
-              </a>
                 </Col>
               </Row>
               <Row>
@@ -1224,20 +1355,45 @@ let FlightCard = ({ airline, departure, arrival, duration, disabledAmenities, co
                 {t("grndtotal")}: €{people * cost}
                 </Col>
               </Row>
+              <Row>
+                <Col>
+                {/* Book Now: <a href={"https://www.booking.com/"+{airline}} target="_blank" rel="noreferrer">
+                {"https://www.booking.com/"+airline}
+              </a> */}
+             <Link to="/book">
+
+<Button variant="primary">
+{t("booknow")}
+</Button>
+</Link>
+                </Col>
+              </Row>
+             
             </Card.Body>
           </Card>
+          <Switch>
+          <Route exact path="/book">
+            <BookingPage />
+          </Route>
+        </Switch>
           </div>
   );}
 };
 
-let BusCard = ({ airline, departureBus, arrivalBus, duration, disabledAmenities, cost, departureBusTime, arrivalBusTime, departureBusReturnTime, arrivalBusReturnTime, returnbus, people }) => {
+let BusCard = ({ airline, departureBus, arrivalBus, duration, disabledAmenities, cost, departureBusTime, arrivalBusTime, departureBusReturnTime, arrivalBusReturnTime, returnbus, people, disabledAmenitiesF, language }) => {
   let {hotelPrice=0, flightPrice=0, busesPrice=0, totalPrice = 0, setTotalPrice, setBusesPrice, setFlightPrice, setHotelPrice, isSelected, onSelect} = useContext(CardPricesContext);
   const { t } = useTranslation();
   const currentLanguage = i18n.language;
+  const history = useHistory();
+
+
+  const handleBookNowSelection = (e) => {
+    history.push('/booking');
+  };
 
   const handleSelection = (e) => {
     e.preventDefault();
-    setBusesPrice(cost*people);
+    setFlightPrice(cost*people);
   };
 
   return (
@@ -1269,11 +1425,17 @@ let BusCard = ({ airline, departureBus, arrivalBus, duration, disabledAmenities,
             <Row>
             <Col>
             <Card.Text className='fw-bold'>{t("amenities")}:</Card.Text>
-                  {disabledAmenities && 
+            {disabledAmenities && 
                   <ul>
-                  {disabledAmenities.split(',').map((amenity, index) => (
-                    <li key={index}>{amenity}</li>
-                  ))}
+                  {language === 'en'
+                    ? disabledAmenities.split(',').map((amenity, index) => (
+                        <li key={index}>{amenity}</li>
+                      ))
+                    : language === 'fr'
+                    ? disabledAmenitiesF.split(',').map((amenity, index) => (
+                        <li key={index}>{amenity}</li>
+                      ))
+                    : null}
                 </ul>}
                 </Col>
             </Row>

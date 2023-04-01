@@ -3,3 +3,21 @@
 body {
     font-family: 'Poppins', sans-serif;
 }   
+.booking-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .confirmation-card {
+    margin-top: 20px;
+    background-color: #c1f7d5;
+    border-color: #c1f7d5;
+    text-align: center;
+  }
+  
+  .confirmation-icon {
+    margin-bottom: 20px;
+    color: #2ecc71;
+  }
+      

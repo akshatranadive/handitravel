@@ -103,6 +103,8 @@ export default {
     "onboardentertainment":"On-board entertainment",
     "onboardrefreshments":"On-board refreshments",
     "llpeepholes":"Lowered light switches and peepholes",
-    "totalprice":"Total Price"
+    "totalprice":"Total Price",
+    "removeall":"Remove All",
+    "selectall":"Select All",
 // ...
 };

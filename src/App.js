@@ -102,7 +102,7 @@ function App() {
             </Nav> */}
           </Navbar.Collapse>
           <Nav.Item>
-              <Nav.Link >
+              <Nav.Link aria-label='Language selector button'>
               <select value={currentLanguage} onChange={handleLanguageChange}>
                     <option value="en">{t('English')}</option>
                    <option value="fr">{t('Français')}</option>
@@ -124,7 +124,7 @@ function App() {
           <Route path="/tour">
             <FlightPage/>
           </Route>
-          <Route path="/buses">
+          <Route path="/book">
           <BookingPage/>
           </Route>
           <Route path="/settings">
