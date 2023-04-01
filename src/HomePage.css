@@ -83,7 +83,7 @@ body {
   .bimage {
     background-image: url('./assets/finalbg.png');
     background-size:cover;
-    height: 147vh;
+    height: 165vh;
   } 
   
   .card-col{
@@ -105,6 +105,9 @@ body {
     text-transform:uppercase;
     text-decoration: none;
     cursor: pointer;
+  }
+  h3:hover{
+    font-size: 170%;
   }
 
   .threef {

@@ -1,5 +1,5 @@
 export default {
-          "greeting": "Bienvenue chez Handi Travels",
+          "greeting": "Briser les barrières au voyage",
           "English": "Anglais",
           "Français": "Français",
           "We are dedicated": "Nous nous engageons à fournir les meilleures options de voyage pour les personnes handicapées.",

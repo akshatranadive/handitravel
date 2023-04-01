@@ -26,6 +26,7 @@ body {
 
 .nav-link:hover {
   color: rgb(255, 53, 53);
+  font-size: 125%;
 }
 
 
